@@ -2,6 +2,7 @@
 <p align="center">
 <img src="./Delightful_Sweet.jpg" width="80%">
 </p>
+
 ## Description
 
 ## About the project
