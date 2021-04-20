@@ -1,6 +1,6 @@
 # Delightful Sweets - Cake Shop Web Application
 <p align="center">
-<img src="./Delightful_Sweet.jpg" width="30%">
+<img src="./Delightful_Sweet.jpg" width="50%">
 </p>
 ## Description
 
