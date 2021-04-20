@@ -4,9 +4,15 @@
 </p>
 
 ## Description
+This is a web application that allow users to create an account with a fictional bakery, Delightful Sweets, and order baked goods such as cake and pies to be made
+and deliver to.
 
 ## About the project
-
+This personal project was started for me to learn and practice making a full-stack web application using the following technologies:
+- Node.js
+- Express
+- React
+- MongoDB
 
 ## Current progress
 The following feature is being work on at the moment:
