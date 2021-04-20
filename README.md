@@ -18,4 +18,4 @@ This personal project was started for me to learn and practice making a full-sta
 The following features are being work on at the moment:
 - Product details screen to allow Admin user to list all products and create, edit and delete a product
 - User make an order and use PayPal to process payment
-- Generate a list of product to be bake
+- Generate a list of order to be bake
