@@ -11,7 +11,7 @@ and deliver to.
 This personal project was started for me to learn and practice making a full-stack web application using the following technologies:
 - Node.js
 - Express
-- React
+- React + Redux
 - MongoDB
 
 ## Current progress
