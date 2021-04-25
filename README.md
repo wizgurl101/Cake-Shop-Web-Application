@@ -17,7 +17,7 @@ This personal project was started for me to learn and practice making a full-sta
 ## Current progress
 
 ### Application can do the following:
-- Create a new accoount
+- Create a new account
 - Admin user can edit and delete users
 
 ### The following features are being work on at the moment:
