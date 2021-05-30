@@ -1,6 +1,6 @@
 import bcrypt from 'bcryptjs';
 
-const users = [
+const userSampleData = [
   // first user sample data
   {
     name: 'Admin User',
@@ -22,4 +22,4 @@ const users = [
   },
 ];
 
-export default users;
+export default userSampleData;
