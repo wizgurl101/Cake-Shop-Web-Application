@@ -17,7 +17,7 @@ const userSampleData = [
   //   third user sample data
   {
     name: 'Hello Kitty',
-    email: 'hello@email,com',
+    email: 'hello@email.com',
     password: bcrypt.hashSync('hello', 10),
   },
 ];

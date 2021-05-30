@@ -26,16 +26,6 @@ const productSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-    size: {
-      type: String,
-      required: true,
-    },
-    reviews: [reviewSchema],
-    rating: {
-      type: Number,
-      required: true,
-      default: 0,
-    },
   },
   {
     timestamps: true,
