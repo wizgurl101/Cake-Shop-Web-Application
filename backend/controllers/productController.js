@@ -47,4 +47,31 @@ const deleteProduct = asyncHandler(async (req, res) => {
   }
 });
 
-export { getProducts, getProductById, deleteProduct };
+/**
+ * @desc Update a single product
+ * @route PUT /cakeshop/products/:id
+ * @access Private/Admin
+ */
+const updateProduct = asyncHandler(async (req, res) => {
+  const { name, image, description, category } = req.body;
+
+  // find the product to be updated
+  const product = await Product.findById(req.params.id);
+
+  // if the product exist, update all its fields
+  if (product) {
+    product.name = name;
+    product.image = image;
+    product.description = description;
+    product.category = category;
+
+    // save the updated product
+    const updateProduct = await product.save();
+    res.status(201).json(updateProduct);
+  } else {
+    res.status(404);
+    throw new Error("Product not found.");
+  }
+});
+
+export { getProducts, getProductById, deleteProduct, updateProduct };
