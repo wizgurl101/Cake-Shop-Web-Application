@@ -19,8 +19,8 @@ const ProductEditScreen = ({ match, history }) => {
   const [uploading, setUploading] = useState(false);
 
   // get product details
-  //   const productDetails = useSelector((state) => state.productDetail);
-  //   const { loading, error, product } = productDetails;
+  const productDetails = useSelector((state) => state.productDetails);
+  const { loading, error, product } = productDetails;
 
   // update product
   const productUpdated = useSelector((state) => state.productUpdate);

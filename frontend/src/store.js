@@ -4,6 +4,7 @@ import { composeWithDevTools } from "redux-devtools-extension";
 
 import {
   productDeleteReducer,
+  productDetailsReducer,
   productListReducer,
   productUpdateReducer,
 } from "./reducers/productReducers.js";
@@ -21,6 +22,7 @@ const reducer = combineReducers({
   productList: productListReducer,
   productDelete: productDeleteReducer,
   productUpdate: productUpdateReducer,
+  productDetails: productDetailsReducer,
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
   userList: userListReducer,
