@@ -1,25 +1,69 @@
-import axios from 'axios'
-import { 
-    PRODUCT_LIST_FAIL, 
-    PRODUCT_LIST_REQUEST, 
-    PRODUCT_LIST_SUCCESS 
-} from '../constants/productConstants'
+import axios from "axios";
+import {
+  PRODUCT_DELETE_FAIL,
+  PRODUCT_DELETE_REQUEST,
+  PRODUCT_DELETE_SUCCESS,
+  PRODUCT_LIST_FAIL,
+  PRODUCT_LIST_REQUEST,
+  PRODUCT_LIST_SUCCESS,
+} from "../constants/productConstants";
+
+import { logout } from "./userActions";
 
 export const listProducts = () => async (dispatch) => {
-    try {
-        dispatch({ type: PRODUCT_LIST_REQUEST })
+  try {
+    dispatch({ type: PRODUCT_LIST_REQUEST });
 
-        const { data } = await axios.get('/cakeshop/products')
+    const { data } = await axios.get("/cakeshop/products");
 
-        dispatch({
-            type: PRODUCT_LIST_SUCCESS,
-            payload: data
-        })
+    dispatch({
+      type: PRODUCT_LIST_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: PRODUCT_LIST_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
 
-    } catch (error) {
-        dispatch({
-            type: PRODUCT_LIST_FAIL,
-            payload: error.response && error.response.data.message ? error.response.data.message : error.message
-        })
+export const deleteProduct = (id) => async (dispatch, getState) => {
+  try {
+    dispatch({ type: PRODUCT_DELETE_REQUEST });
+
+    // get current login user info
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    // set bearer token in headers of the request
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+
+    await axios.delete(`/cakeshop/products/${id}`, config);
+
+    dispatch({ type: PRODUCT_DELETE_SUCCESS });
+  } catch (error) {
+    const message =
+      error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message;
+
+    // if user is not admin
+    if (message === "Not authorized, token failed") {
+      dispatch(logout());
     }
-}
+
+    dispatch({
+      type: PRODUCT_DELETE_FAIL,
+      payload: message,
+    });
+  }
+};

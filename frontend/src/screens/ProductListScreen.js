@@ -4,7 +4,7 @@ import { Table, Button, Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message.js";
 import Loader from "../components/Loader.js";
-import { listProducts } from "../actions/productActions.js";
+import { listProducts, deleteProduct } from "../actions/productActions.js";
 
 const ProductListScreen = ({ history }) => {
   const dispatch = useDispatch();
@@ -12,6 +12,14 @@ const ProductListScreen = ({ history }) => {
   // get all products
   const productList = useSelector((state) => state.productList);
   const { loading, error, products } = productList;
+
+  //  delete a product
+  const productDeleted = useSelector((state) => state.productDelete);
+  const {
+    loading: loadingDelete,
+    error: errorDelete,
+    success: successDelete,
+  } = productDeleted;
 
   // get current log in user info
   const currentUserLogin = useSelector((state) => state.userLogin);
@@ -22,11 +30,15 @@ const ProductListScreen = ({ history }) => {
     if (!userInfo.isAdmin) {
       history.pushState("/login");
     }
-  }, [userInfo, history]);
+
+    dispatch(listProducts());
+  }, [userInfo, history, successDelete]);
 
   // FUNCTIONS
-  const deleteProductHander = () => {
-    console.log("deleted product");
+  const deleteProductHander = (productId, productName) => {
+    if (window.confirm(`Confirm deleting ${productName}?`)) {
+      dispatch(deleteProduct(productId));
+    }
   };
 
   const createNewProductHandler = () => {
@@ -46,6 +58,8 @@ const ProductListScreen = ({ history }) => {
           </Button>
         </Col>
       </Row>
+      {loadingDelete && <Loader />}
+      {errorDelete && <Message variant="danger">{errorDelete}</Message>}
       {loading ? (
         <Loader />
       ) : error ? (
@@ -76,7 +90,9 @@ const ProductListScreen = ({ history }) => {
                     <Button
                       variant="danger"
                       className="btn-sm"
-                      onClick={() => deleteProductHander(product._id)}
+                      onClick={() =>
+                        deleteProductHander(product._id, product.name)
+                      }
                     >
                       <i className="fas fa-trash" />
                     </Button>
