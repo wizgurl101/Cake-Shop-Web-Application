@@ -2,9 +2,9 @@ import { useEffect } from "react";
 import { LinkContainer } from "react-router-bootstrap";
 import { Table, Button, Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import Message from "../components/Message.js";
-import Loader from "../components/Loader.js";
-import { listProducts, deleteProduct } from "../actions/productActions.js";
+import Message from "../../components/Message.js";
+import Loader from "../../components/Loader.js";
+import { listProducts, deleteProduct } from "../../actions/productActions.js";
 
 const ProductListScreen = ({ history }) => {
   const dispatch = useDispatch();
@@ -32,7 +32,7 @@ const ProductListScreen = ({ history }) => {
     }
 
     dispatch(listProducts());
-  }, [userInfo, history, successDelete]);
+  }, [dispatch, userInfo, history, successDelete]);
 
   // FUNCTIONS
   const deleteProductHander = (productId, productName) => {
