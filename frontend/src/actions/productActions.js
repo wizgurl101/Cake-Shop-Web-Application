@@ -114,7 +114,7 @@ export const updateProduct = (product) => async (dispatch, getState) => {
   }
 };
 
-export const productDetails = (id) => async (dispatch) => {
+export const listProductDetails = (id) => async (dispatch) => {
   try {
     dispatch({ type: PRODUCT_DETAILS_REQUEST });
 
