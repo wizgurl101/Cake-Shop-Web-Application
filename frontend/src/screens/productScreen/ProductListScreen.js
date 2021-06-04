@@ -27,8 +27,14 @@ const ProductListScreen = ({ history }) => {
 
   useEffect(() => {
     // if current user is not admin, redirect to login page
+    console.log(userInfo);
+
+    if (userInfo === null) {
+      history.push("/login");
+    }
+
     if (!userInfo.isAdmin) {
-      history.pushState("/login");
+      history.push("/login");
     }
 
     dispatch(listProducts());
