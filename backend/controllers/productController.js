@@ -74,4 +74,29 @@ const updateProduct = asyncHandler(async (req, res) => {
   }
 });
 
-export { getProducts, getProductById, deleteProduct, updateProduct };
+/**
+ * @desc Create a product
+ * @route POST /cakeshop/products
+ * @access Private/Admin
+ */
+const createProduct = asyncHandler(async (req, res) => {
+  const newProduct = new Product({
+    name: "Sample name",
+    user: req.user._id,
+    image: "/images/noImage.jpg",
+    description: "Sample description",
+    category: "Sample brand",
+  });
+
+  const createdProduct = await newProduct.save();
+
+  res.status(201).json(createdProduct);
+});
+
+export {
+  getProducts,
+  getProductById,
+  deleteProduct,
+  updateProduct,
+  createProduct,
+};
