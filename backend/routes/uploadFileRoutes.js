@@ -20,10 +20,10 @@ const storage = multer.diskStorage({
 // check whether upload file is a valid image file
 function checkFileType(file, cb) {
   const allowFileTypes = /jpg|jpeg|png/;
-  const isValidExtansionName = fileTypes.test(
+  const isValidExtansionName = allowFileTypes.test(
     path.extname(file.originalname).toLowerCase()
   );
-  const isValidMimeType = fileTypes.test(file.mimetype);
+  const isValidMimeType = allowFileTypes.test(file.mimetype);
 
   if (isValidExtansionName && isValidMimeType) {
     return cb(null, true);

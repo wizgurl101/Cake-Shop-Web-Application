@@ -8,6 +8,7 @@ import connectToDatabase from "./config/db.js";
 // Routes
 import productRoutes from "./routes/productRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
+import uploadFileRoutes from "./routes/uploadFileRoutes.js";
 
 dotenv.config();
 connectToDatabase();
@@ -27,7 +28,7 @@ app.get("/", (req, res) => {
 // mount the routes
 app.use("/cakeshop/products", productRoutes);
 app.use("/cakeshop/users", userRoutes);
-app.use("/cakeshop/upload", uploadRoutes);
+app.use("/cakeshop/upload", uploadFileRoutes);
 
 const PORT = process.env.PORT || 5000;
 app.listen(
