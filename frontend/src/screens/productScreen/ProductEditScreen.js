@@ -62,8 +62,28 @@ const ProductEditScreen = ({ match, history }) => {
   }, [dispatch, history, productId, product, successUpdate]);
 
   // FUNCTIONS
-  const uploadImageFileHandler = () => {
-    console.log("image uploaded");
+  const uploadImageFileHandler = async (event) => {
+    // get the file upload by user
+    const imageFile = event.target.files[0];
+    const formData = new FormData();
+    formData.append("image", imageFile);
+
+    // have spinner component appears when uploading file
+    setUploading(true);
+
+    // request to backend
+    try {
+      const config = { headers: { "Content-Type": "multipart/form-data" } };
+
+      // get the file path to the image uploaded
+      const { data } = await axios.post("/cakeshop/upload", formData, config);
+
+      setImage(data);
+      setUploading(false);
+    } catch (error) {
+      console.error(error);
+      setUploading(false);
+    }
   };
 
   const submitHandler = (event) => {
