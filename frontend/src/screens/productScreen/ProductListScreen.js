@@ -2,9 +2,9 @@ import { useEffect } from "react";
 import { LinkContainer } from "react-router-bootstrap";
 import { Table, Button, Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import Message from "../components/Message.js";
-import Loader from "../components/Loader.js";
-import { listProducts, deleteProduct } from "../actions/productActions.js";
+import Message from "../../components/Message.js";
+import Loader from "../../components/Loader.js";
+import { listProducts, deleteProduct } from "../../actions/productActions.js";
 
 const ProductListScreen = ({ history }) => {
   const dispatch = useDispatch();
@@ -27,12 +27,18 @@ const ProductListScreen = ({ history }) => {
 
   useEffect(() => {
     // if current user is not admin, redirect to login page
+    console.log(userInfo);
+
+    if (userInfo === null) {
+      history.push("/login");
+    }
+
     if (!userInfo.isAdmin) {
-      history.pushState("/login");
+      history.push("/login");
     }
 
     dispatch(listProducts());
-  }, [userInfo, history, successDelete]);
+  }, [dispatch, userInfo, history, successDelete]);
 
   // FUNCTIONS
   const deleteProductHander = (productId, productName) => {
