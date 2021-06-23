@@ -1,4 +1,28 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
+
+/**
+ * Review Schema
+ */
+const reviewSchema = mongoose.Schema(
+  {
+    name: {
+      type: String,
+      required: true,
+    },
+    rating: {
+      type: Number,
+      required: true,
+    },
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: "User",
+    },
+  },
+  {
+    timestamps: true,
+  }
+);
 
 /**
  * Product Schema
@@ -8,7 +32,7 @@ const productSchema = mongoose.Schema(
     user: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
-      ref: 'User',
+      ref: "User",
     },
     name: {
       type: String,
@@ -26,12 +50,23 @@ const productSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    reviews: [reviewSchema],
+    rating: {
+      type: Number,
+      required: true,
+      default: 0,
+    },
+    numberOfReviews: {
+      type: Number,
+      required: true,
+      default: 0,
+    },
   },
   {
     timestamps: true,
   }
 );
 
-const Product = mongoose.model('Product', productSchema);
+const Product = mongoose.model("Product", productSchema);
 
 export default Product;
