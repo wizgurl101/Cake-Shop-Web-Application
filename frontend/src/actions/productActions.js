@@ -1,5 +1,8 @@
 import axios from "axios";
 import {
+  PRODUCT_CREATE_FAIL,
+  PRODUCT_CREATE_REQUEST,
+  PRODUCT_CREATE_SUCCESS,
   PRODUCT_DELETE_FAIL,
   PRODUCT_DELETE_REQUEST,
   PRODUCT_DELETE_SUCCESS,
@@ -128,6 +131,38 @@ export const listProductDetails = (id) => async (dispatch) => {
         error.response && error.response.data.message
           ? error.response.data.message
           : error.message,
+    });
+  }
+};
+
+export const createProduct = () => async (dispatch, getState) => {
+  try {
+    dispatch({ type: PRODUCT_CREATE_REQUEST });
+
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    const config = { headers: { Authorization: `Bearer ${userInfo.token}` } };
+
+    // send request to backend to create a new product
+    const { data } = await axios.post("/cakeshop/products", {}, config);
+
+    dispatch({ type: PRODUCT_CREATE_SUCCESS, payload: data });
+  } catch (error) {
+    const message =
+      error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message;
+
+    // if user is not admin
+    if (message === "Not authorized, token failed") {
+      dispatch(logout());
+    }
+
+    dispatch({
+      type: PRODUCT_CREATE_FAIL,
+      payload: message,
     });
   }
 };

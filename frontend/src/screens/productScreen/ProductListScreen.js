@@ -4,7 +4,12 @@ import { Table, Button, Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Message from "../../components/Message.js";
 import Loader from "../../components/Loader.js";
-import { listProducts, deleteProduct } from "../../actions/productActions.js";
+import {
+  listProducts,
+  deleteProduct,
+  createProduct,
+} from "../../actions/productActions.js";
+import { PRODUCT_CREATE_RESET } from "../../constants/productConstants.js";
 
 const ProductListScreen = ({ history }) => {
   const dispatch = useDispatch();
@@ -13,7 +18,7 @@ const ProductListScreen = ({ history }) => {
   const productList = useSelector((state) => state.productList);
   const { loading, error, products } = productList;
 
-  //  delete a product
+  // delete a product
   const productDeleted = useSelector((state) => state.productDelete);
   const {
     loading: loadingDelete,
@@ -21,11 +26,22 @@ const ProductListScreen = ({ history }) => {
     success: successDelete,
   } = productDeleted;
 
+  // create a product
+  const productCreated = useSelector((state) => state.productCreate);
+  const {
+    loading: loadingCreate,
+    error: errorCreate,
+    success: successCreate,
+  } = productCreated;
+
   // get current log in user info
   const currentUserLogin = useSelector((state) => state.userLogin);
   const { userInfo } = currentUserLogin;
 
   useEffect(() => {
+    // reset product object in state after creating a new product
+    dispatch({ type: PRODUCT_CREATE_RESET });
+
     // if current user is not admin, redirect to login page
     console.log(userInfo);
 
@@ -37,8 +53,13 @@ const ProductListScreen = ({ history }) => {
       history.push("/login");
     }
 
+    // if creating a new product was successful, redirect user to product edit screen
+    if (successCreate) {
+      history.push(`/admin/product/${createProduct._id}/edit`);
+    }
+
     dispatch(listProducts());
-  }, [dispatch, userInfo, history, successDelete]);
+  }, [dispatch, userInfo, history, successDelete, successCreate]);
 
   // FUNCTIONS
   const deleteProductHander = (productId, productName) => {
@@ -48,7 +69,7 @@ const ProductListScreen = ({ history }) => {
   };
 
   const createNewProductHandler = () => {
-    console.log("add new product");
+    dispatch(createProduct());
   };
 
   return (
@@ -66,6 +87,8 @@ const ProductListScreen = ({ history }) => {
       </Row>
       {loadingDelete && <Loader />}
       {errorDelete && <Message variant="danger">{errorDelete}</Message>}
+      {loadingCreate && <Loader />}
+      {errorCreate && <message variant="danger">{errorCreate}</message>}
       {loading ? (
         <Loader />
       ) : error ? (
