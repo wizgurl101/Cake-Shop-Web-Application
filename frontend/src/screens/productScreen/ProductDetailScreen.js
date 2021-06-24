@@ -13,6 +13,7 @@ import {
 import Message from "../../components/Message";
 import Loader from "../../components/Loader";
 import MetaData from "../../components/MetaData";
+import Rating from "../../components/Rating";
 import { listProductDetails } from "../../actions/productActions";
 
 /**
@@ -70,10 +71,10 @@ const ProductDetailScreen = ({ match }) => {
                   <h3>{product.name}</h3>
                 </ListGroup.Item>
                 <ListGroup.Item>
-                  {/* <Rating
+                  <Rating
                     value={product.rating}
                     text={`${product.numberOfReviews} review`}
-                  /> */}
+                  />
                 </ListGroup.Item>
                 <ListGroup.Item>
                   Description: {product.description}
