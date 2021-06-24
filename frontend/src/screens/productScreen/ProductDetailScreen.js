@@ -12,6 +12,7 @@ import {
 } from "react-bootstrap";
 import Message from "../../components/Message";
 import Loader from "../../components/Loader";
+import MetaData from "../../components/MetaData";
 import { listProductDetails } from "../../actions/productActions";
 
 /**
@@ -57,6 +58,7 @@ const ProductDetailScreen = ({ match }) => {
         <Message variant="danger">{error}</Message>
       ) : (
         <>
+          <MetaData title={product.name} />
           {/* Product Detail Section */}
           <Row>
             <Col md={6}>
