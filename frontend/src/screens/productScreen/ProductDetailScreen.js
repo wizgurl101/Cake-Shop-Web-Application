@@ -1,6 +1,6 @@
 import React from "react";
 
-const ProductScreen = () => {
+const ProductDetailScreen = () => {
   return (
     <div>
       <h1>Product Screen</h1>
@@ -8,4 +8,4 @@ const ProductScreen = () => {
   );
 };
 
-export default ProductScreen;
+export default ProductDetailScreen;
