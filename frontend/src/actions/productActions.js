@@ -175,7 +175,7 @@ export const createProduct = () => async (dispatch, getState) => {
     const config = { headers: { Authorization: `Bearer ${userInfo.token}` } };
 
     // send request to backend to create a new product
-    const { data } = await axios.post("/cakeshop/products", {}, config);
+    const { data } = await axios.post(`/cakeshop/products`, {}, config);
 
     dispatch({ type: PRODUCT_CREATE_SUCCESS, payload: data });
   } catch (error) {
@@ -238,7 +238,7 @@ export const listTopProducts = () => async (dispatch) => {
   try {
     dispatch({ type: PRODUCT_TOP_REQUEST });
 
-    const { data } = await axios.get("/cakeshop/products/top");
+    const { data } = await axios.get(`/cakeshop/products/top`);
 
     dispatch({ type: PRODUCT_TOP_SUCCESS, payload: data });
   } catch (error) {
