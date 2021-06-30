@@ -2,6 +2,9 @@ import axios from "axios";
 import {
   PRODUCT_CREATE_FAIL,
   PRODUCT_CREATE_REQUEST,
+  PRODUCT_CREATE_REVIEW_FAIL,
+  PRODUCT_CREATE_REVIEW_REQUEST,
+  PRODUCT_CREATE_REVIEW_SUCCESS,
   PRODUCT_CREATE_SUCCESS,
   PRODUCT_DELETE_FAIL,
   PRODUCT_DELETE_REQUEST,
@@ -19,6 +22,10 @@ import {
 
 import { logout } from "./userActions";
 
+/**
+ *
+ * @returns
+ */
 export const listProducts = () => async (dispatch) => {
   try {
     dispatch({ type: PRODUCT_LIST_REQUEST });
@@ -40,6 +47,11 @@ export const listProducts = () => async (dispatch) => {
   }
 };
 
+/**
+ *
+ * @param {*} id
+ * @returns
+ */
 export const deleteProduct = (id) => async (dispatch, getState) => {
   try {
     dispatch({ type: PRODUCT_DELETE_REQUEST });
@@ -77,6 +89,11 @@ export const deleteProduct = (id) => async (dispatch, getState) => {
   }
 };
 
+/**
+ *
+ * @param {*} product
+ * @returns
+ */
 export const updateProduct = (product) => async (dispatch, getState) => {
   try {
     dispatch({ type: PRODUCT_UPDATE_REQUEST });
@@ -117,6 +134,11 @@ export const updateProduct = (product) => async (dispatch, getState) => {
   }
 };
 
+/**
+ *
+ * @param {*} id
+ * @returns
+ */
 export const listProductDetails = (id) => async (dispatch) => {
   try {
     dispatch({ type: PRODUCT_DETAILS_REQUEST });
@@ -135,6 +157,10 @@ export const listProductDetails = (id) => async (dispatch) => {
   }
 };
 
+/**
+ *
+ * @returns
+ */
 export const createProduct = () => async (dispatch, getState) => {
   try {
     dispatch({ type: PRODUCT_CREATE_REQUEST });
@@ -166,3 +192,37 @@ export const createProduct = () => async (dispatch, getState) => {
     });
   }
 };
+
+export const createProductReview =
+  (productId, review) => async (dispatch, getState) => {
+    try {
+      dispatch({ type: PRODUCT_CREATE_REVIEW_REQUEST });
+
+      const {
+        userLogin: { userInfo },
+      } = getState;
+
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${userInfo.token}`,
+        },
+      };
+
+      // send a request to backend to create a new review for the product
+      await axios.post(`/api/products/${productId}/reviews`, review, config);
+
+      dispatch({ type: PRODUCT_CREATE_REVIEW_SUCCESS });
+    } catch (error) {
+      const message =
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message;
+
+      if (message === "Not authorized, token failed") {
+        dispatch(logout());
+      }
+
+      dispatch({ type: PRODUCT_CREATE_REVIEW_FAIL, payload: message });
+    }
+  };
