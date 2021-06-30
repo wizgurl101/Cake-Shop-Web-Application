@@ -68,6 +68,7 @@ const Rating = ({ value, text, color }) => {
           }
         />
       </span>
+      <span>{text ? text : ""}</span>
     </div>
   );
 };
