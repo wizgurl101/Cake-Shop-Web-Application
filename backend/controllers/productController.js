@@ -93,10 +93,58 @@ const createProduct = asyncHandler(async (req, res) => {
   res.status(201).json(createdProduct);
 });
 
+/**
+ *
+ */
+const createProductReview = asyncHandler(async (req, res) => {
+  const { rating, comment } = req.body;
+
+  // find the product to add the new review to
+  const productToReview = await Product.findById(req.params.id);
+
+  // product does exist
+  if (productToReview) {
+    // check if the user already review the product
+    const isReviewAlready = productToReview.reviews.find(
+      (review) => review.user.toString() === req.user._id.toString()
+    );
+
+    if (isReviewAlready) {
+      // set it to 400, bad request
+      res.status(400);
+      throw new Error("Product already reviewd.");
+    }
+
+    // user did not already review the product so create a new review
+    const newReview = {
+      name: req.user.name,
+      rating: Number(rating),
+      comment,
+      user: req.user._id,
+    };
+
+    productToReview.reviews.push(newReview);
+    productToReview.numberOfReviews = productToReview.reviews.length;
+
+    // update the total rating for that product
+    productToReview.rating =
+      productToReview.reviews.reduce((acc, item) => item.rating + acc, 0) /
+      productToReview.numberOfReviews;
+
+    // update the product
+    await productToReview.save();
+    res.status(201).json({ message: "Review added" });
+  } else {
+    res.status(404);
+    throw new Error("Product not found.");
+  }
+});
+
 export {
   getProducts,
   getProductById,
   deleteProduct,
   updateProduct,
   createProduct,
+  createProductReview,
 };
