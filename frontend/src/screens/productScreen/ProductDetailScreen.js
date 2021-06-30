@@ -24,6 +24,11 @@ import { listProductDetails } from "../../actions/productActions";
  */
 const ProductDetailScreen = ({ match }) => {
   const dispatch = useDispatch();
+  // state variables
+  const [qty, setQty] = useState(1);
+  const [price, setPrice] = useState(14.99);
+  const [rating, setRating] = useState(0);
+  const [comment, setComment] = useState("");
 
   // get product detail
   const productDetails = useSelector((state) => state.productDetails);
@@ -90,7 +95,7 @@ const ProductDetailScreen = ({ match }) => {
                       {/* TODO: Come back later dynamically change price based on size */}
                       <Col>Price:</Col>
                       <Col>
-                        <strong>$14.99</strong>
+                        <strong>${price}</strong>
                       </Col>
                     </Row>
                   </ListGroup.Item>
@@ -163,7 +168,7 @@ const ProductDetailScreen = ({ match }) => {
               </ListGroup>
               {/* New Review Form */}
               <ListGroup.Item>
-                <h2>Wrtie a Customer Review</h2>
+                <h2>Write a Customer Review</h2>
                 {userInfo ? (
                   <Form onSubmit={submitHandler}>
                     <Form.Group controlId="rating">
