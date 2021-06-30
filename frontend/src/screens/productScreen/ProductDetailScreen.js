@@ -14,7 +14,11 @@ import Message from "../../components/Message";
 import Loader from "../../components/Loader";
 import MetaData from "../../components/MetaData";
 import Rating from "../../components/Rating";
-import { listProductDetails } from "../../actions/productActions";
+import {
+  listProductDetails,
+  createProductReview,
+} from "../../actions/productActions";
+import { PRODUCT_CREATE_REVIEW_RESET } from "../../constants/productConstants";
 
 /**
  * Product Detail Screen display the product detail of a single product, allow
@@ -22,7 +26,7 @@ import { listProductDetails } from "../../actions/productActions";
  * @param
  * @returns
  */
-const ProductDetailScreen = ({ match }) => {
+const ProductDetailScreen = ({ history, match }) => {
   const dispatch = useDispatch();
   // state variables
   const [qty, setQty] = useState(1);
@@ -38,10 +42,23 @@ const ProductDetailScreen = ({ match }) => {
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
+  // get new product review
+  const productReviewCreate = useSelector((state) => state.productReviewCreate);
+  const { error: errorProductReview, success: successProductReview } =
+    productReviewCreate;
+
   useEffect(() => {
     // get the product details
     dispatch(listProductDetails(match.params.id));
-  }, [dispatch, match]);
+
+    // review for product was successfully created
+    if (successProductReview) {
+      alert("Review Submitted!");
+      setRating(0);
+      setComment("");
+      dispatch({ type: PRODUCT_CREATE_REVIEW_RESET });
+    }
+  }, [dispatch, match, successProductReview]);
 
   // FUNCTIONS
   const addToCartHandler = () => {
@@ -50,7 +67,7 @@ const ProductDetailScreen = ({ match }) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    console.log("form submited");
+    dispatch(createProductReview(match.params.id, { rating, comment }));
   };
 
   return (
@@ -169,6 +186,9 @@ const ProductDetailScreen = ({ match }) => {
               {/* New Review Form */}
               <ListGroup.Item>
                 <h2>Write a Customer Review</h2>
+                {errorProductReview && (
+                  <Message variant="danger">{errorProductReview}</Message>
+                )}
                 {userInfo ? (
                   <Form onSubmit={submitHandler}>
                     <Form.Group controlId="rating">
