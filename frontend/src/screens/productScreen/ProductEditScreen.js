@@ -49,7 +49,11 @@ const ProductEditScreen = ({ match, history }) => {
       history.push("/admin/productlist");
     } else {
       // if product does not match id in URL
-      if (!product.name || product._id !== productId) {
+      if (
+        typeof product === "undefined" ||
+        !product.name ||
+        product._id !== productId
+      ) {
         dispatch(listProductDetails(productId));
       } else {
         // show the product

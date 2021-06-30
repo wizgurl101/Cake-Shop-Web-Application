@@ -42,20 +42,15 @@ const ProductListScreen = ({ history }) => {
     // reset product object in state after creating a new product
     dispatch({ type: PRODUCT_CREATE_RESET });
 
-    // if current user is not admin, redirect to login page
-    console.log(userInfo);
-
-    if (userInfo === null) {
-      history.push("/login");
-    }
-
-    if (!userInfo.isAdmin) {
+    if (!userInfo || !userInfo.isAdmin) {
       history.push("/login");
     }
 
     // if creating a new product was successful, redirect user to product edit screen
     if (successCreate) {
       history.push(`/admin/product/${createProduct._id}/edit`);
+    } else {
+      dispatch(listProducts());
     }
 
     dispatch(listProducts());
