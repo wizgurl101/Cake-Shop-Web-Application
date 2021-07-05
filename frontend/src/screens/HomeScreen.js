@@ -2,10 +2,12 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Row, Col } from "react-bootstrap";
 
+import MetaData from "../components/MetaData";
 import Product from "../components/Product";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
 import { listProducts } from "../actions/productActions";
+import ProductCarousel from "../components/ProductCarousel";
 
 const HomeScreen = () => {
   const dispatch = useDispatch();
@@ -13,15 +15,14 @@ const HomeScreen = () => {
   const productList = useSelector((state) => state.productList);
   const { loading, error, products } = productList;
 
-  // console.log('products is')
-  // console.log(products)
-
   useEffect(() => {
     dispatch(listProducts());
   }, [dispatch]);
 
   return (
     <>
+      <MetaData />
+      <ProductCarousel />
       <h2>Latest Baked Goods</h2>
       {loading ? (
         <Loader />
