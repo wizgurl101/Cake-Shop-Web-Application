@@ -6,6 +6,7 @@ import colors from "colors";
 import connectToDatabase from "./config/db.js";
 
 // Routes
+import orderRoutes from "./routes/orderRoutes.js";
 import productRoutes from "./routes/productRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
 import uploadFileRoutes from "./routes/uploadFileRoutes.js";
@@ -26,6 +27,7 @@ app.get("/", (req, res) => {
 });
 
 // mount the routes
+app.use("/cakeshop/orders", orderRoutes);
 app.use("/cakeshop/products", productRoutes);
 app.use("/cakeshop/users", userRoutes);
 app.use("/cakeshop/upload", uploadFileRoutes);
