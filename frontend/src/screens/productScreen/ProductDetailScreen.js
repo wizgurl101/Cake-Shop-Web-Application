@@ -62,7 +62,7 @@ const ProductDetailScreen = ({ history, match }) => {
 
   // FUNCTIONS
   const addToCartHandler = () => {
-    console.log("added item to cart");
+    history.push(`/cart/${match.params.id}?qty=${qty}`);
   };
 
   const submitHandler = (e) => {

@@ -4,7 +4,7 @@ import {
   CART_SAVE_DELIVERY_DATE,
   CART_SAVE_PAYMENT_METHOD,
   CART_SAVE_SHIPPING_ADDRESS,
-} from "../constants/CartConstants.js";
+} from "../constants/cartConstants.js";
 
 export const cartReducer = (
   state = { cartItems: [], shippingAddress: {}, deliveryDate: "" },
