@@ -9,9 +9,41 @@ const Header = () => {
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
+  // FUNCTIONS
   const logoutHandler = () => {
     dispatch(logout());
   };
+
+  let userHeader = "";
+  // check if user is admin to display admin header
+  if (userInfo && userInfo.isAdmin) {
+    userHeader = (
+      <NavDropdown title="Admin" id="adminmenu">
+        <LinkContainer to="/profile">
+          <NavDropdown.Item>Profile</NavDropdown.Item>
+        </LinkContainer>
+        <LinkContainer to="/admin/userList">
+          <NavDropdown.Item>Users</NavDropdown.Item>
+        </LinkContainer>
+        <LinkContainer to="/admin/productList">
+          <NavDropdown.Item>Products</NavDropdown.Item>
+        </LinkContainer>
+        <NavDropdown.Item onClick={logoutHandler}>Logout</NavDropdown.Item>
+      </NavDropdown>
+    );
+  }
+
+  if (userInfo && !userInfo.isAdmin) {
+    // user is not admin
+    userHeader = (
+      <NavDropdown title={userInfo.name} id="username">
+        <LinkContainer to="/profile">
+          <NavDropdown.Item>Profile</NavDropdown.Item>
+        </LinkContainer>
+        <NavDropdown.Item onClick={logoutHandler}>Logout</NavDropdown.Item>
+      </NavDropdown>
+    );
+  }
 
   return (
     <header>
@@ -27,29 +59,18 @@ const Header = () => {
           <Navbar.Collapse id="basic-navbar-nav" />
 
           <Nav className="ml-auto">
+            <LinkContainer to="/cart">
+              <Nav.Link>
+                <i className="fas fa-shopping-cart" />
+                Cart
+              </Nav.Link>
+            </LinkContainer>
             {userInfo ? (
-              <NavDropdown title={userInfo.name} id="username">
-                <LinkContainer to="/profile">
-                  <NavDropdown.Item>Profile</NavDropdown.Item>
-                </LinkContainer>
-                <NavDropdown.Item onClick={logoutHandler}>
-                  Logout
-                </NavDropdown.Item>
-              </NavDropdown>
+              userHeader
             ) : (
               <LinkContainer to="/login">
                 <Nav.Link href="/login">Sign In</Nav.Link>
               </LinkContainer>
-            )}
-            {userInfo && userInfo.isAdmin && (
-              <NavDropdown title="Admin" id="adminmenu">
-                <LinkContainer to="/admin/userList">
-                  <NavDropdown.Item>Users</NavDropdown.Item>
-                </LinkContainer>
-                <LinkContainer to="/admin/productList">
-                  <NavDropdown.Item>Products</NavDropdown.Item>
-                </LinkContainer>
-              </NavDropdown>
             )}
           </Nav>
         </Container>

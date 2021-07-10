@@ -67,7 +67,7 @@ const ProductDetailScreen = ({ history, match }) => {
       dispatch(listProductDetails(match.params.id));
       dispatch({ type: PRODUCT_CREATE_REVIEW_RESET });
     }
-  }, [dispatch, match, successProductReview]);
+  }, [dispatch, match, successProductReview, product._id]);
 
   // FUNCTIONS
   const priceChangeHandler = (e) => {
@@ -138,7 +138,6 @@ const ProductDetailScreen = ({ history, match }) => {
                 <ListGroup variant="flush">
                   <ListGroup.Item>
                     <Row>
-                      {/* TODO: Come back later dynamically change price based on size */}
                       <Col>Price:</Col>
                       <Col>
                         <strong>${price}</strong>
@@ -155,13 +154,13 @@ const ProductDetailScreen = ({ history, match }) => {
                           onChange={priceChangeHandler}
                         >
                           <option key="sm" value="sm">
-                            Small - 12'
+                            Small (12')
                           </option>
                           <option key="med" value="med">
-                            Medium - 14'
+                            Medium (14')
                           </option>
                           <option key="lg" value="lg">
-                            Large - 18'
+                            Large (18')
                           </option>
                         </Form.Control>
                       </Col>
@@ -205,7 +204,6 @@ const ProductDetailScreen = ({ history, match }) => {
           {/* Product Review Section */}
           <Row>
             <Col md={6}>
-              {/* TODO: Debug this, product.reviews is undefined */}
               <h2>Reviews</h2>
               {product.reviews.length === 0 && <Message>No Reviews</Message>}
               <ListGroup variant="flush">
