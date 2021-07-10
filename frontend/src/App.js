@@ -6,6 +6,7 @@ import Footer from "./components/Footer";
 import HomeScreen from "./screens/HomeScreen";
 import LoginScreen from "./screens/LoginScreen";
 import RegisterScreen from "./screens/RegisterScreen";
+import CartScreen from "./screens/CartScreen";
 import UserListScreen from "./screens/userScreen/UserListScreen";
 import UserEditScreen from "./screens/userScreen/UserEditScreen";
 import ProfileScreen from "./screens/userScreen/ProfileScreen";
@@ -22,6 +23,7 @@ const App = () => {
           <Route path="/login" component={LoginScreen} />
           <Route path="/register" component={RegisterScreen} />
           <Route path="/profile" component={ProfileScreen} />
+          <Route path="/cart/:id" component={CartScreen} />
           <Route path="/product/:id" component={ProductDetailScreen} />
           <Route path="/admin/userList" component={UserListScreen} />
           <Route path="/admin/user/:id/edit" component={UserEditScreen} />

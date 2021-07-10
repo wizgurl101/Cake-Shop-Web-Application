@@ -19,6 +19,11 @@ import {
   createProductReview,
 } from "../../actions/productActions";
 import { PRODUCT_CREATE_REVIEW_RESET } from "../../constants/productConstants";
+import {
+  SIZE_SMALL_PRICE,
+  SIZE_MEDIUM_PRICE,
+  SIZE_LARGE_PRICE,
+} from "../../constants/priceConstants.js";
 
 /**
  * Product Detail Screen display the product detail of a single product, allow
@@ -30,7 +35,7 @@ const ProductDetailScreen = ({ history, match }) => {
   const dispatch = useDispatch();
   // state variables
   const [qty, setQty] = useState(1);
-  const [price, setPrice] = useState(14.99);
+  const [price, setPrice] = useState(SIZE_SMALL_PRICE);
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState("");
 
@@ -44,25 +49,49 @@ const ProductDetailScreen = ({ history, match }) => {
 
   // get new product review
   const productReviewCreate = useSelector((state) => state.productReviewCreate);
-  const { error: errorProductReview, success: successProductReview } =
-    productReviewCreate;
+  const {
+    loading: loadingProductReview,
+    success: successProductReview,
+    error: errorProductReview,
+  } = productReviewCreate;
 
   useEffect(() => {
-    // get the product details
-    dispatch(listProductDetails(match.params.id));
-
     // review for product was successfully created
     if (successProductReview) {
       alert("Review Submitted!");
       setRating(0);
       setComment("");
+    }
+
+    if (!product._id || product._id !== match.params.id) {
+      dispatch(listProductDetails(match.params.id));
       dispatch({ type: PRODUCT_CREATE_REVIEW_RESET });
     }
   }, [dispatch, match, successProductReview]);
 
   // FUNCTIONS
+  const priceChangeHandler = (e) => {
+    switch (e.target.value) {
+      case "sm":
+        setPrice(SIZE_SMALL_PRICE);
+        break;
+      case "med":
+        setPrice(SIZE_MEDIUM_PRICE);
+        break;
+      case "lg":
+        setPrice(SIZE_LARGE_PRICE);
+        break;
+      default:
+        console.error("error within priceChangeHandler");
+    }
+  };
+
+  const qtyChangeHandler = (e) => {
+    setQty(e.target.value);
+  };
+
   const addToCartHandler = () => {
-    console.log("added item to cart");
+    history.push(`/cart/${match.params.id}?qty=${qty}&price=${price}`);
   };
 
   const submitHandler = (e) => {
@@ -120,8 +149,11 @@ const ProductDetailScreen = ({ history, match }) => {
                     <Row>
                       <Col>Size:</Col>
                       <Col>
-                        {/* TODO: check if size and qty are being submited */}
-                        <Form.Control as="select" aria-label="Select a size">
+                        <Form.Control
+                          as="select"
+                          aria-label="Select a size"
+                          onChange={priceChangeHandler}
+                        >
                           <option key="sm" value="sm">
                             Small - 12'
                           </option>
@@ -139,8 +171,11 @@ const ProductDetailScreen = ({ history, match }) => {
                     <Row>
                       <Col>Qty:</Col>
                       <Col>
-                        {/* TODO: check if qty selected get submitted */}
-                        <Form.Control as="select" aria-label="Select quantity">
+                        <Form.Control
+                          as="select"
+                          aria-label="Select quantity"
+                          onChange={qtyChangeHandler}
+                        >
                           <option key="1" value="1">
                             1
                           </option>
@@ -170,22 +205,29 @@ const ProductDetailScreen = ({ history, match }) => {
           {/* Product Review Section */}
           <Row>
             <Col md={6}>
+              {/* TODO: Debug this, product.reviews is undefined */}
               <h2>Reviews</h2>
-              {/* {product.reviews.length === 0 && <Message>No Reviews</Message>} */}
+              {product.reviews.length === 0 && <Message>No Reviews</Message>}
               <ListGroup variant="flush">
                 {/* loop through product array of reviews */}
-                {/* {product.reviews.map((review) => (
+                {product.reviews.map((review) => (
                   <ListGroup.Item key={review._id}>
                     <strong>{review.name}</strong>
                     <Rating value={review.rating} />
-                    <p>{review.createAt.substring(0, 10)}</p>
+                    <p>{review.createAt}</p>
                     <p>{review.comment}</p>
                   </ListGroup.Item>
-                ))} */}
+                ))}
               </ListGroup>
               {/* New Review Form */}
               <ListGroup.Item>
                 <h2>Write a Customer Review</h2>
+                {loadingProductReview && <Loader />}
+                {successProductReview && (
+                  <Message variant="success">
+                    Review submitted successfully
+                  </Message>
+                )}
                 {errorProductReview && (
                   <Message variant="danger">{errorProductReview}</Message>
                 )}
