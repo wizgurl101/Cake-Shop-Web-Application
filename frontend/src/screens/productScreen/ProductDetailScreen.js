@@ -51,8 +51,8 @@ const ProductDetailScreen = ({ history, match }) => {
     // get the product details
     dispatch(listProductDetails(match.params.id));
 
-    // review for product was successfully created
     if (successProductReview) {
+      // review for product was successfully created
       alert("Review Submitted!");
       setRating(0);
       setComment("");
@@ -61,6 +61,22 @@ const ProductDetailScreen = ({ history, match }) => {
   }, [dispatch, match, successProductReview]);
 
   // FUNCTIONS
+  const priceChangeHandler = (e) => {
+    switch (e.target.value) {
+      case "sm":
+        setPrice(14.99);
+        break;
+      case "med":
+        setPrice(16.99);
+        break;
+      case "lg":
+        setPrice(18.99);
+        break;
+      default:
+        console.error("error within priceChangeHandler");
+    }
+  };
+
   const addToCartHandler = () => {
     history.push(`/cart/${match.params.id}?qty=${qty}`);
   };
@@ -120,8 +136,11 @@ const ProductDetailScreen = ({ history, match }) => {
                     <Row>
                       <Col>Size:</Col>
                       <Col>
-                        {/* TODO: check if size and qty are being submited */}
-                        <Form.Control as="select" aria-label="Select a size">
+                        <Form.Control
+                          as="select"
+                          aria-label="Select a size"
+                          onChange={priceChangeHandler}
+                        >
                           <option key="sm" value="sm">
                             Small - 12'
                           </option>
@@ -139,7 +158,6 @@ const ProductDetailScreen = ({ history, match }) => {
                     <Row>
                       <Col>Qty:</Col>
                       <Col>
-                        {/* TODO: check if qty selected get submitted */}
                         <Form.Control as="select" aria-label="Select quantity">
                           <option key="1" value="1">
                             1
@@ -170,6 +188,7 @@ const ProductDetailScreen = ({ history, match }) => {
           {/* Product Review Section */}
           <Row>
             <Col md={6}>
+              {/* TODO: Debug this, product.reviews is undefined */}
               <h2>Reviews</h2>
               {/* {product.reviews.length === 0 && <Message>No Reviews</Message>} */}
               <ListGroup variant="flush">

@@ -13,7 +13,7 @@ import {
  * @param {*} qty Quantity of product order
  * @returns
  */
-export const addToCart = (id, qty) => async (dispatch, getState) => {
+export const addToCart = (id, qty, size) => async (dispatch, getState) => {
   const { item } = await axios.get(`/cakeshop/products/${id}`);
 
   dispatch({
@@ -23,7 +23,7 @@ export const addToCart = (id, qty) => async (dispatch, getState) => {
       name: item.name,
       image: item.image,
       price: item.price,
-      size: item.size,
+      size,
       qty,
     },
   });
