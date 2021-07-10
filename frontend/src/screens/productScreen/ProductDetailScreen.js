@@ -154,13 +154,13 @@ const ProductDetailScreen = ({ history, match }) => {
                           onChange={priceChangeHandler}
                         >
                           <option key="sm" value="sm">
-                            Small - 12'
+                            Small (12')
                           </option>
                           <option key="med" value="med">
-                            Medium - 14'
+                            Medium (14')
                           </option>
                           <option key="lg" value="lg">
-                            Large - 18'
+                            Large (18')
                           </option>
                         </Form.Control>
                       </Col>

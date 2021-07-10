@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -12,39 +12,25 @@ import {
 } from "react-bootstrap";
 import Message from "../components/Message.js";
 import { addToCart, removeFromCart } from "../actions/cartActions";
-import {
-  SIZE_SMALL_PRICE,
-  SIZE_MEDIUM_PRICE,
-  SIZE_LARGE_PRICE,
-} from "../constants/priceConstants.js";
+import { SIZE_SMALL_PRICE } from "../constants/priceConstants.js";
+import { determinePrice, determineSize } from "../helpers/PriceSizeHelpers.js";
 
 const CartScreen = ({ match, location, history }) => {
   const dispatch = useDispatch();
   const productId = match.params.id;
 
-  const qty = location.search
+  const productQty = location.search
     ? Number(location.search.split("&")[0].split("=")[1])
     : 1;
 
-  const price = location.search
+  const productPrice = location.search
     ? Number(location.search.split("&")[1].split("=")[1])
     : SIZE_SMALL_PRICE;
 
-  let size = "";
+  const [price, setPrice] = useState(productPrice);
+  const [qty, setQty] = useState(productQty);
 
-  switch (price) {
-    case SIZE_SMALL_PRICE:
-      size = "sm";
-      break;
-    case SIZE_MEDIUM_PRICE:
-      size = "med";
-      break;
-    case SIZE_LARGE_PRICE:
-      size = "lg";
-      break;
-    default:
-      console.error("Incorrect price in URL given to CartScreen.js");
-  }
+  let size = determineSize(price);
 
   const cart = useSelector((state) => state.cart);
   const { cartItems } = cart;
@@ -59,6 +45,10 @@ const CartScreen = ({ match, location, history }) => {
   // FUNCTIONS
   const removeFromCartHandler = (id) => {
     dispatch(removeFromCart(id));
+  };
+
+  const sizeChangeHandler = (e) => {
+    setPrice(determinePrice(e.target.value));
   };
 
   const checkoutHandler = () => {
@@ -88,12 +78,35 @@ const CartScreen = ({ match, location, history }) => {
                   <Col md={2}>
                     <Form.Control
                       as="select"
-                      value={cartItem.qty}
-                      onChange={(e) =>
+                      value={cartItem.size}
+                      onChange={sizeChangeHandler}
+                    >
+                      <option key="sm" value="sm">
+                        Small (12')
+                      </option>
+                      <option key="med" value="med">
+                        Medium (14')
+                      </option>
+                      <option key="lg" value="lg">
+                        Large (18')
+                      </option>
+                    </Form.Control>
+                  </Col>
+                  <Col md={2}>
+                    <Form.Control
+                      as="select"
+                      value={qty}
+                      onChange={(e) => {
+                        setQty(e.target.value);
                         dispatch(
-                          addToCart(cartItem.product, Number(e.target.value))
-                        )
-                      }
+                          addToCart(
+                            cartItem.product,
+                            Number(e.target.value),
+                            size,
+                            price
+                          )
+                        );
+                      }}
                     >
                       <option key="1" value="1">
                         1
@@ -126,7 +139,7 @@ const CartScreen = ({ match, location, history }) => {
           <ListGroup variant="flush">
             <ListGroup.Item>
               <h2>
-                Subtotal ({cartItems.reduce((acc, item) => acc + item.qty, 0)})
+                Subtotal ({cartItems.reduce((acc, item) => acc + item.qty, "")})
                 items
               </h2>
               $
