@@ -15,16 +15,14 @@ import {
  */
 export const addToCart =
   (id, qty, size, price) => async (dispatch, getState) => {
-    const { item } = await axios.get(`/cakeshop/products/${id}`);
-
-    console.log(item);
+    const { data } = await axios.get(`/cakeshop/products/${id}`);
 
     dispatch({
       type: CART_ADD_ITEM,
       payload: {
-        product: item._id,
-        name: item.name,
-        image: item.image,
+        product: data._id,
+        name: data.name,
+        image: data.image,
         price,
         size,
         qty,
@@ -34,7 +32,7 @@ export const addToCart =
     // save to cart in local storage
     localStorage.setItem(
       "cartItems",
-      JSON.stringify(getState().cart.cartitems)
+      JSON.stringify(getState().cart.cartItems)
     );
   };
 
