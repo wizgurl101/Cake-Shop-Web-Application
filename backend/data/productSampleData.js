@@ -6,8 +6,8 @@ const productSampleData = [
     description:
       "Moist milk chocolate cake filled and frosted with ganache and our in house chocolate buttercream.",
     category: "Cake",
-    rating: 5,
-    numberOfReviews: 2,
+    rating: 0,
+    numberOfReviews: 0,
   },
   {
     name: "Birthday Cake",
@@ -15,8 +15,8 @@ const productSampleData = [
     description:
       "Our most popular birthday flavour, Vanilla Almond is extra moist with a rich almond flavor, paired perfectly with our in house vanilla buttercream.",
     category: "Cake",
-    rating: 3.5,
-    numberOfReviews: 4,
+    rating: 0,
+    numberOfReviews: 0,
   },
   {
     name: "Mousse Cake",
@@ -24,8 +24,8 @@ const productSampleData = [
     description:
       "This super moist light chocolate mousse cake combines unsweetened natural cocoa powder and dark cocoa powder for an extra rich flavor.",
     category: "Cake",
-    rating: 4,
-    numberOfReviews: 4,
+    rating: 0,
+    numberOfReviews: 0,
   },
   {
     name: "Pink Vanilla Cake",
@@ -33,8 +33,8 @@ const productSampleData = [
     description:
       "A classice vanilla cake with a pink twist.  A moist vanilla cake made with Madagascar vanilla extract.",
     category: "Cake",
-    rating: 5,
-    numberOfReviews: 2,
+    rating: 0,
+    numberOfReviews: 0,
   },
   {
     name: "Apple Pie",
@@ -42,8 +42,8 @@ const productSampleData = [
     description:
       "Hand-peeled and hand-sliced crisp apples mixed with cinnamon, nutmeg and sugar, then places between two layers of our handmade flaky crust for apple pie perfection.",
     category: "Pie",
-    rating: 5,
-    numberOfReviews: 2,
+    rating: 0,
+    numberOfReviews: 0,
   },
   {
     name: "Banana Cream Pie",
@@ -51,8 +51,8 @@ const productSampleData = [
     description:
       "Creamy, handmade vanilla pudding flavoured with spiced rum, layered with sliced bananas in a golden, flaky crust and topped with homemade whipped cream whipped to perfection.",
     category: "Pie",
-    rating: 5,
-    numberOfReviews: 2,
+    rating: 0,
+    numberOfReviews: 0,
   },
 ];
 
