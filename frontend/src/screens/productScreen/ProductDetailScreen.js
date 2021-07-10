@@ -189,13 +189,19 @@ const ProductDetailScreen = ({ history, match }) => {
                     </Row>
                   </ListGroup.Item>
                   <ListGroup.Item>
-                    <Button
-                      onClick={addToCartHandler}
-                      className="btn-block"
-                      type="button"
-                    >
-                      Add To Cart
-                    </Button>
+                    {userInfo ? (
+                      <Button
+                        onClick={addToCartHandler}
+                        className="btn-block"
+                        type="button"
+                      >
+                        Add To Cart
+                      </Button>
+                    ) : (
+                      <Message>
+                        <Link to="/login">Sign in</Link> to place order
+                      </Message>
+                    )}
                   </ListGroup.Item>
                 </ListGroup>
               </Card>
@@ -261,7 +267,7 @@ const ProductDetailScreen = ({ history, match }) => {
                   </Form>
                 ) : (
                   <Message>
-                    Please <Link to="/login">sign in</Link> to write a review.
+                    Please <Link to="/login">sign in</Link> to write a review
                   </Message>
                 )}
               </ListGroup.Item>
