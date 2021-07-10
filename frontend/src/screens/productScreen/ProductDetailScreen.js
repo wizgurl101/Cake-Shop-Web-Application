@@ -43,8 +43,6 @@ const ProductDetailScreen = ({ history, match }) => {
   const productDetails = useSelector((state) => state.productDetails);
   const { loading, error, product } = productDetails;
 
-  console.log(product);
-
   // get log in user info to show form for giving a review
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
@@ -212,14 +210,14 @@ const ProductDetailScreen = ({ history, match }) => {
               {product.reviews.length === 0 && <Message>No Reviews</Message>}
               <ListGroup variant="flush">
                 {/* loop through product array of reviews */}
-                {/* {product.reviews.map((review) => (
+                {product.reviews.map((review) => (
                   <ListGroup.Item key={review._id}>
                     <strong>{review.name}</strong>
                     <Rating value={review.rating} />
-                    <p>{review.createAt.substring(0, 10)}</p>
+                    <p>{review.createAt}</p>
                     <p>{review.comment}</p>
                   </ListGroup.Item>
-                ))} */}
+                ))}
               </ListGroup>
               {/* New Review Form */}
               <ListGroup.Item>
