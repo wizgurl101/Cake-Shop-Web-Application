@@ -13,24 +13,30 @@ import {
  * @param {*} qty Quantity of product order
  * @returns
  */
-export const addToCart = (id, qty, size) => async (dispatch, getState) => {
-  const { item } = await axios.get(`/cakeshop/products/${id}`);
+export const addToCart =
+  (id, qty, size, price) => async (dispatch, getState) => {
+    const { item } = await axios.get(`/cakeshop/products/${id}`);
 
-  dispatch({
-    type: CART_ADD_ITEM,
-    payload: {
-      product: item._id,
-      name: item.name,
-      image: item.image,
-      price: item.price,
-      size,
-      qty,
-    },
-  });
+    console.log(item);
 
-  // save to cart in local storage
-  localStorage.setItem("cartItems", JSON.stringify(getState().cart.cartitems));
-};
+    dispatch({
+      type: CART_ADD_ITEM,
+      payload: {
+        product: item._id,
+        name: item.name,
+        image: item.image,
+        price,
+        size,
+        qty,
+      },
+    });
+
+    // save to cart in local storage
+    localStorage.setItem(
+      "cartItems",
+      JSON.stringify(getState().cart.cartitems)
+    );
+  };
 
 /**
  * Remove product from cart

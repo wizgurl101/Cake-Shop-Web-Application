@@ -19,6 +19,11 @@ import {
   createProductReview,
 } from "../../actions/productActions";
 import { PRODUCT_CREATE_REVIEW_RESET } from "../../constants/productConstants";
+import {
+  SIZE_SMALL_PRICE,
+  SIZE_MEDIUM_PRICE,
+  SIZE_LARGE_PRICE,
+} from "../../constants/priceConstants.js";
 
 /**
  * Product Detail Screen display the product detail of a single product, allow
@@ -30,7 +35,7 @@ const ProductDetailScreen = ({ history, match }) => {
   const dispatch = useDispatch();
   // state variables
   const [qty, setQty] = useState(1);
-  const [price, setPrice] = useState(14.99);
+  const [price, setPrice] = useState(SIZE_SMALL_PRICE);
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState("");
 
@@ -38,24 +43,31 @@ const ProductDetailScreen = ({ history, match }) => {
   const productDetails = useSelector((state) => state.productDetails);
   const { loading, error, product } = productDetails;
 
+  console.log("product in details: " + product);
+  console.log(product);
+
   // get log in user info to show form for giving a review
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
   // get new product review
   const productReviewCreate = useSelector((state) => state.productReviewCreate);
-  const { error: errorProductReview, success: successProductReview } =
-    productReviewCreate;
+  const {
+    loading: loadingProductReview,
+    success: successProductReview,
+    error: errorProductReview,
+  } = productReviewCreate;
 
   useEffect(() => {
-    // get the product details
-    dispatch(listProductDetails(match.params.id));
-
+    // review for product was successfully created
     if (successProductReview) {
-      // review for product was successfully created
       alert("Review Submitted!");
       setRating(0);
       setComment("");
+    }
+
+    if (!product._id || product._id !== match.params.id) {
+      dispatch(listProductDetails(match.params.id));
       dispatch({ type: PRODUCT_CREATE_REVIEW_RESET });
     }
   }, [dispatch, match, successProductReview]);
@@ -64,21 +76,25 @@ const ProductDetailScreen = ({ history, match }) => {
   const priceChangeHandler = (e) => {
     switch (e.target.value) {
       case "sm":
-        setPrice(14.99);
+        setPrice(SIZE_SMALL_PRICE);
         break;
       case "med":
-        setPrice(16.99);
+        setPrice(SIZE_MEDIUM_PRICE);
         break;
       case "lg":
-        setPrice(18.99);
+        setPrice(SIZE_LARGE_PRICE);
         break;
       default:
         console.error("error within priceChangeHandler");
     }
   };
 
+  const qtyChangeHandler = (e) => {
+    setQty(e.target.value);
+  };
+
   const addToCartHandler = () => {
-    history.push(`/cart/${match.params.id}?qty=${qty}`);
+    history.push(`/cart/${match.params.id}?qty=${qty}&price=${price}`);
   };
 
   const submitHandler = (e) => {
@@ -158,7 +174,11 @@ const ProductDetailScreen = ({ history, match }) => {
                     <Row>
                       <Col>Qty:</Col>
                       <Col>
-                        <Form.Control as="select" aria-label="Select quantity">
+                        <Form.Control
+                          as="select"
+                          aria-label="Select quantity"
+                          onChange={qtyChangeHandler}
+                        >
                           <option key="1" value="1">
                             1
                           </option>
