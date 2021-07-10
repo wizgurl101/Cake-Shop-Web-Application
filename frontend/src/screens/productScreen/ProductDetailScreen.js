@@ -43,7 +43,6 @@ const ProductDetailScreen = ({ history, match }) => {
   const productDetails = useSelector((state) => state.productDetails);
   const { loading, error, product } = productDetails;
 
-  console.log("product in details: " + product);
   console.log(product);
 
   // get log in user info to show form for giving a review
@@ -210,7 +209,7 @@ const ProductDetailScreen = ({ history, match }) => {
             <Col md={6}>
               {/* TODO: Debug this, product.reviews is undefined */}
               <h2>Reviews</h2>
-              {/* {product.reviews.length === 0 && <Message>No Reviews</Message>} */}
+              {product.reviews.length === 0 && <Message>No Reviews</Message>}
               <ListGroup variant="flush">
                 {/* loop through product array of reviews */}
                 {/* {product.reviews.map((review) => (
@@ -225,6 +224,12 @@ const ProductDetailScreen = ({ history, match }) => {
               {/* New Review Form */}
               <ListGroup.Item>
                 <h2>Write a Customer Review</h2>
+                {loadingProductReview && <Loader />}
+                {successProductReview && (
+                  <Message variant="success">
+                    Review submitted successfully
+                  </Message>
+                )}
                 {errorProductReview && (
                   <Message variant="danger">{errorProductReview}</Message>
                 )}
