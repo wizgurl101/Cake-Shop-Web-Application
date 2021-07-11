@@ -8,6 +8,14 @@ import { saveShippingAddress } from "../../actions/cartActions";
 const ShippingScreen = ({ history }) => {
   const dispatch = useDispatch();
 
+  // check that user is log in
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+
+  if (!userInfo) {
+    history.push("/login");
+  }
+
   const cart = useSelector((state) => state.cart);
   const { shippingAddress } = cart;
 
@@ -23,7 +31,7 @@ const ShippingScreen = ({ history }) => {
   };
   return (
     <FormContainer>
-      <CheckProgress shipping />
+      <CheckProgress signin shipping />
       <h1>Shipping</h1>
       <Form onSubmit={submitHandler}>
         <Form.Group controlId="address">
