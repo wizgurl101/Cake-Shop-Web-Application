@@ -53,7 +53,7 @@ const CartScreen = ({ match, location, history }) => {
 
   const checkoutHandler = () => {
     // redirect login user to shipping page
-    console.log("checkout");
+    history.push("/shipping");
   };
 
   return (

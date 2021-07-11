@@ -1,18 +1,9 @@
 import { Nav } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 
-const CheckoutProgress = ({ signIn, shipping, delivery, payment, summary }) => {
+const CheckoutProgress = ({ shipping, delivery, payment, summary }) => {
   return (
     <Nav className="justify-content-center mb-4">
-      <Nav.Item>
-        {signIn ? (
-          <LinkContainer to="/login">
-            <Nav.Link>SIGN IN - </Nav.Link>
-          </LinkContainer>
-        ) : (
-          <Nav.Link disabled>SIGN IN - </Nav.Link>
-        )}
-      </Nav.Item>
       <Nav.Item>
         {shipping ? (
           <LinkContainer to="/shipping">
