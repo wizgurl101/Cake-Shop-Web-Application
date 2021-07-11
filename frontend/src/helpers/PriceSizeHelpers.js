@@ -52,3 +52,12 @@ export const determineSize = (price) => {
 
   return size;
 };
+
+/**
+ * Function add an ending zero to calculated price after rounding
+ * @param {*} num
+ * @returns
+ */
+export const addZeroAtEnd = (price) => {
+  return (Math.round(price * 100) / 100).toFixed(2);
+};
