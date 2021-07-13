@@ -20,6 +20,10 @@ h2 {
   margin: 0.1rem;
 }
 
+button {
+  margin-top: 0.5rem;
+}
+
 /* carousel */
 .carousel-item-next,
 .carousel-item-prev,

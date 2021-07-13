@@ -14,7 +14,7 @@ import SummaryScreen from "./screens/checkoutScreen/SummaryScreen";
 import OrderDetailScreen from "./screens/orderScreen/OrderDetailScreen";
 import UserListScreen from "./screens/userScreen/UserListScreen";
 import UserEditScreen from "./screens/userScreen/UserEditScreen";
-import ProfileScreen from "./screens/userScreen/ProfileScreen";
+import UserProfileScreen from "./screens/userScreen/UserProfileScreen";
 import ProductListScreen from "./screens/productScreen/ProductListScreen";
 import ProductEditScreen from "./screens/productScreen/ProductEditScreen";
 import ProductDetailScreen from "./screens/productScreen/ProductDetailScreen";
@@ -27,7 +27,7 @@ const App = () => {
         <Container>
           <Route path="/login" component={LoginScreen} />
           <Route path="/register" component={RegisterScreen} />
-          <Route path="/profile" component={ProfileScreen} />
+          <Route path="/profile" component={UserProfileScreen} />
           <Route path="/cart/:id" component={CartScreen} />
           <Route path="/shipping" component={ShippingScreen} />
           <Route path="/delivery" component={DeliveryScreen} />
