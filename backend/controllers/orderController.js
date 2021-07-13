@@ -13,6 +13,7 @@ const createOrder = asyncHandler(async (req, res) => {
     paymentMethod,
     deliveryDate,
     itemsPrice,
+    taxPrice,
     shippingPrice,
     totalPrice,
   } = req.body;

@@ -5,12 +5,16 @@ import { useDispatch, useSelector } from "react-redux";
 import Message from "../../components/Message";
 import CheckoutProgress from "../../components/CheckoutProgress";
 import { addZeroAtEnd } from "../../helpers/PriceSizeHelpers";
+import { createOrder } from "../../actions/orderActions";
 
 const SummaryScreen = ({ history }) => {
   const dispatch = useDispatch();
 
   const cart = useSelector((state) => state.cart);
   const { cartItems, shippingAddress, deliveryDate, paymentMethod } = cart;
+
+  const orderCreate = useSelector((state) => state.orderCreate);
+  const { order, success, error } = orderCreate;
 
   if (!shippingAddress) {
     history.push("/shipping");
@@ -20,12 +24,19 @@ const SummaryScreen = ({ history }) => {
     history.push("/payment");
   }
 
+  useEffect(() => {
+    // successfully created new order
+    if (success) {
+      history.push(`/order/${order._id}`);
+    }
+  }, [history, success]);
+
   // Calculate shipping, tax and total price of order
   cart.itemsPrice = addZeroAtEnd(
     cart.cartItems.reduce((acc, item) => acc + item.price * item.qty, 0)
   );
 
-  cart.shippingPrice = addZeroAtEnd(cart.itemsPrice > 100 ? 0 : 100);
+  cart.shippingPrice = addZeroAtEnd(cart.itemsPrice < 100 ? 0 : 100);
 
   cart.taxPrice = addZeroAtEnd(Number((0.15 * cart.itemsPrice).toFixed(2)));
 
@@ -37,7 +48,18 @@ const SummaryScreen = ({ history }) => {
 
   // FUNCTION
   const placeOrderHandler = () => {
-    console.log("place order");
+    dispatch(
+      createOrder({
+        orderItems: cartItems,
+        shippingAddress: shippingAddress,
+        paymentMethod: paymentMethod,
+        deliveryDate: deliveryDate,
+        itemsPrice: cart.itemsPrice,
+        taxPrice: cart.taxPrice,
+        shippingPrice: cart.shippingPrice,
+        totalPrice: cart.totalPrice,
+      })
+    );
   };
 
   return (
@@ -126,9 +148,9 @@ const SummaryScreen = ({ history }) => {
                 </Row>
               </ListGroup.Item>
 
-              {/* <ListGroup.Item>
+              <ListGroup.Item>
                 {error && <Message variant="danger">{error}</Message>}
-              </ListGroup.Item> */}
+              </ListGroup.Item>
 
               <ListGroup.Item>
                 <Button

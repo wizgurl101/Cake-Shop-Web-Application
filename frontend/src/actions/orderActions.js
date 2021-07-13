@@ -1,3 +1,5 @@
+import axios from "axios";
+
 import {
   ORDER_CREATE_FAIL,
   ORDER_CREATE_REQUEST,
@@ -53,7 +55,7 @@ export const getOrderDetails = (orderId) => async (dispatch, getState) => {
 
     const { data } = await axios.get(`/cakeshop/orders/${orderId}`, config);
 
-    dispatch({ type: ORDER_DETAILS_SUCCESS });
+    dispatch({ type: ORDER_DETAILS_SUCCESS, payload: data });
   } catch (error) {
     dispatch({
       type: ORDER_DETAILS_FAIL,
