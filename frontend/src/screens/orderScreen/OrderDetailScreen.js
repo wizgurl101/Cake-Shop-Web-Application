@@ -79,7 +79,6 @@ const OrderDetailScreen = ({ match, history }) => {
                 {order.paymentMethod}
               </p>
               {order.isPaid ? (
-                // TODO: check the paidAt again
                 <Message variant="success">
                   Paid on {order.paidAt || ""}
                 </Message>

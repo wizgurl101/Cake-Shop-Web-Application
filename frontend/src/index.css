@@ -25,6 +25,12 @@ label {
   margin-top: 0.5rem;
 }
 
+#searchbox {
+  display: flex;
+  flex-direction: row;
+  margin: 0;
+}
+
 /* carousel */
 .carousel-item-next,
 .carousel-item-prev,

@@ -12,11 +12,13 @@ import ProductCarousel from "../components/ProductCarousel";
 const HomeScreen = () => {
   const dispatch = useDispatch();
 
+  const searchProduct = match.params.searchProduct;
+
   const productList = useSelector((state) => state.productList);
   const { loading, error, products } = productList;
 
   useEffect(() => {
-    dispatch(listProducts());
+    dispatch(listProducts(searchProduct));
   }, [dispatch]);
 
   return (
