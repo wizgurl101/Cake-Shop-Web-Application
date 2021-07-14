@@ -20,7 +20,8 @@ h2 {
   margin: 0.1rem;
 }
 
-button {
+button,
+label {
   margin-top: 0.5rem;
 }
 

@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import Message from "../../components/Message";
 import Loader from "../../components/Loader";
+import { addZeroAtEnd } from "../../helpers/PriceSizeHelpers";
+import { getOrderDetails } from "../../actions/orderActions";
 
 const OrderDetailScreen = ({ match, history }) => {
   const dispatch = useDispatch();
@@ -14,17 +16,19 @@ const OrderDetailScreen = ({ match, history }) => {
   const { userInfo } = userLogin;
 
   const orderDetails = useSelector((state) => state.orderDetails);
-  const {
-    order,
-    loading: loadingOrderDetails,
-    error: errorOrderDetails,
-  } = orderDetails;
+  const { order, loading, error } = orderDetails;
 
   useEffect(() => {
-    if (!userInfo) {
-      history.push("/login");
-    }
-  }, [userLogin]);
+    // if (!userInfo) {
+    //   history.push("/login");
+    // }
+
+    // if (!order || order._id !== orderId) {
+    //   dispatch(getOrderDetails(orderId));
+    // }
+
+    dispatch(getOrderDetails(orderId));
+  }, []);
 
   // FUNCTIONS
   const setDeliverStatusHandler = () => {
@@ -35,10 +39,10 @@ const OrderDetailScreen = ({ match, history }) => {
     console.log("order been paid");
   };
 
-  return loadingOrderDetails ? (
+  return loading ? (
     <Loader />
-  ) : errorOrderDetails ? (
-    <Message variant="danger">{errorOrderDetails}</Message>
+  ) : error ? (
+    <Message variant="danger">{error}</Message>
   ) : (
     <>
       <h1>Order #{order._id}</h1>
@@ -61,4 +65,5 @@ const OrderDetailScreen = ({ match, history }) => {
     </>
   );
 };
+
 export default OrderDetailScreen;
