@@ -1,7 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Navbar, Container, Nav, NavDropdown } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
+import { Route } from "react-router-dom";
 import { logout } from "../actions/userActions";
+import SearchBox from "./SearchBox";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -35,9 +37,8 @@ const Header = () => {
       </NavDropdown>
     );
   }
-
+  // user is not admin
   if (userInfo && !userInfo.isAdmin) {
-    // user is not admin
     userHeader = (
       <NavDropdown title={userInfo.name} id="username">
         <LinkContainer to="/profile">
@@ -57,6 +58,7 @@ const Header = () => {
               <strong>Delightful Sweets</strong>
             </Navbar.Brand>
           </LinkContainer>
+          <Route render={({ history }) => <SearchBox history={history} />} />
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav" />
           <Nav className="ml-auto">
