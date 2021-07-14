@@ -7,7 +7,19 @@ import Product from "../models/productModel.js";
  * @access Public
  */
 const getProducts = asyncHandler(async (req, res) => {
-  const products = await Product.find({});
+  // if there is a search product, return it
+  // use $regex to search for any matches
+  const searchProduct = req.query.searchProduct
+    ? {
+        name: {
+          $regex: req.query.searchProduct,
+          $options: "i",
+        },
+      }
+    : {};
+
+  const products = await Product.find({ ...searchProduct });
+
   res.json({ products });
 });
 
