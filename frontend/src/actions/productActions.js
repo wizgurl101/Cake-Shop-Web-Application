@@ -207,7 +207,7 @@ export const createProductReview =
 
       const {
         userLogin: { userInfo },
-      } = getState;
+      } = getState();
 
       const config = {
         headers: {
