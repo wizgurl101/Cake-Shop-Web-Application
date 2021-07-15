@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Row, Col } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 import MetaData from "../components/MetaData";
 import Product from "../components/Product";
@@ -24,8 +25,19 @@ const HomeScreen = ({ match }) => {
   return (
     <>
       <MetaData />
-      <ProductCarousel />
-      <h2>Latest Baked Goods</h2>
+      {!searchProduct ? (
+        <>
+          <ProductCarousel />
+          <h2>Latest Baked Goods</h2>
+        </>
+      ) : (
+        <>
+          <Link to="/" className="btn btn-light">
+            Go Back
+          </Link>
+          <h2>Search Results</h2>
+        </>
+      )}
       {loading ? (
         <Loader />
       ) : error ? (

@@ -56,15 +56,13 @@ const ProductDetailScreen = ({ history, match }) => {
   } = productReviewCreate;
 
   useEffect(() => {
+    dispatch(listProductDetails(match.params.id));
+
     // review for product was successfully created
     if (successProductReview) {
       alert("Review Submitted!");
       setRating(0);
       setComment("");
-    }
-
-    if (!product._id || product._id !== match.params.id) {
-      dispatch(listProductDetails(match.params.id));
       dispatch({ type: PRODUCT_CREATE_REVIEW_RESET });
     }
   }, [dispatch, match, successProductReview, product._id]);
