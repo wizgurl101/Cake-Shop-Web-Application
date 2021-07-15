@@ -32,6 +32,7 @@ const ProductListScreen = ({ history }) => {
     loading: loadingCreate,
     error: errorCreate,
     success: successCreate,
+    product: createdProduct,
   } = productCreated;
 
   // get current log in user info
@@ -48,7 +49,7 @@ const ProductListScreen = ({ history }) => {
 
     // if creating a new product was successful, redirect user to product edit screen
     if (successCreate) {
-      history.push(`/admin/product/${createProduct._id}/edit`);
+      history.push(`/admin/product/${createdProduct._id}/edit`);
     } else {
       dispatch(listProducts());
     }
@@ -75,8 +76,7 @@ const ProductListScreen = ({ history }) => {
         </Col>
         <Col className="text-right">
           <Button className="my-3" onClick={createNewProductHandler}>
-            <i className="fas fa-plus" />
-            Add new product
+            <i className="fas fa-plus" /> Add new product
           </Button>
         </Col>
       </Row>
@@ -110,7 +110,7 @@ const ProductListScreen = ({ history }) => {
                       <Button variant="light" className="btn-sm">
                         <i className="fas fa-edit" />
                       </Button>
-                    </LinkContainer>
+                    </LinkContainer>{" "}
                     <Button
                       variant="danger"
                       className="btn-sm"
