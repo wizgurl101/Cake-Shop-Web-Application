@@ -20,7 +20,7 @@ const HomeScreen = ({ match }) => {
 
   useEffect(() => {
     dispatch(listProducts(searchProduct));
-  }, [dispatch]);
+  }, [dispatch, searchProduct]);
 
   return (
     <>

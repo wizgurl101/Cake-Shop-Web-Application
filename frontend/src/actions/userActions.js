@@ -114,9 +114,6 @@ export const listUsers = () => async (dispatch, getState) => {
       userLogin: { userInfo },
     } = getState();
 
-    console.log("listUsers method, getState is");
-    console.log(getState());
-
     const config = {
       headers: { Authorization: `Bearer ${userInfo.token}` },
     };
