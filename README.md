@@ -25,5 +25,3 @@ This personal project was started for me to learn and practice making a full-sta
 - Using React-Bootstrap library to rapidly build UI
 - Using Postman for API testing
 - Using MongoDB Compass
-- Using NPM as a package manager
-- Creating a script to automate importing JSON sample data to database and clearing database for testing purpose.
