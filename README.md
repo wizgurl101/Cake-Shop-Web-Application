@@ -4,8 +4,7 @@
 </p>
 
 ## Description
-This is a web application that allow users to create an account with a fictional bakery, Delightful Sweets, and order baked goods such as cake and pies to be made
-and deliver to.
+This is a web application that allow users to create an account with a fictional bakery, Delightful Sweets. User can then place an order to be delivery on a particular date.  The "fake" bakery can use the admin account to manage their orders and see a list of baked goods needed to be made for the current day.
 
 ## About the project
 This personal project was started for me to learn and practice making a full-stack web application using the following technologies:
