@@ -18,6 +18,14 @@ const OrderDetailScreen = ({ match, history }) => {
   const orderDetails = useSelector((state) => state.orderDetails);
   const { order, loading, error } = orderDetails;
 
+  // If page is not loading
+  if (!loading) {
+    // calculate order pruce before tax
+    order.itemsPrice = addZeroAtEnd(
+      order.orderItems.reduce((acc, item) => acc + item.price * item.qty, 0)
+    );
+  }
+
   useEffect(() => {
     if (!userInfo) {
       history.push("/login");

@@ -65,7 +65,7 @@ const getOrderById = asyncHandler(async (req, res) => {
 
 /**
  * @desc Update order to paid when payment was successful
- * @route GET /cakeshop/orders/:id/paid
+ * @route GET /cakeshop/orders/:id/payment
  * @access Private
  */
 const updateOrderToPaid = asyncHandler(async (req, res) => {
@@ -95,7 +95,7 @@ const updateOrderToPaid = asyncHandler(async (req, res) => {
 
 /**
  * @desc Update order to delivered
- * @route GET /cakeshop/orders/:id/deliver
+ * @route GET /cakeshop/orders/:id/delivery
  * @access Private
  */
 const updateOrderToDelivered = asyncHandler(async (req, res) => {
