@@ -23,4 +23,5 @@ This personal project was started for me to learn and practice making a full-sta
 - Implementation of Redux to manage application-wide states
 - Application of JSON web token for authorization purpose
 - Using React-Bootstrap library to rapidly build UI
-
+- Using Postman for API testing
+- Using MongoDB Compass to view database
