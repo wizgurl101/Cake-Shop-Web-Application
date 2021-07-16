@@ -15,12 +15,10 @@ This personal project was started for me to learn and practice making a full-sta
 - MongoDB
 
 ## Current progress
+- Working on sorting order list for Admin
 
 ### Application can do the following:
-- Create a new account
-- Admin user can edit and delete users
+- User can create an account to place order
+- Admin can manage users, products and orders
+- Integration of PayPal to handle payment transaction
 
-### The following features are being work on at the moment:
-- Product details screen to allow Admin user to list all products and create, edit and delete a product
-- User make an order and use PayPal to process payment
-- Generate a list of order to be bake
