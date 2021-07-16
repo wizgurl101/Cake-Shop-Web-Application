@@ -19,7 +19,7 @@ This personal project was started for me to learn and practice making a full-sta
 - Admin can manage users, products and orders
 - Integration of PayPal to handle payment transaction
 
-## What have I learn from this project
+## What have I learnt from this project
 - Development of a RESTful E-commerce web application using MERN stack
 - Implementation of Redux to manage application-wide states
 - Application of JSON web token for authorization task
