@@ -32,7 +32,13 @@ app.use("/cakeshop/products", productRoutes);
 app.use("/cakeshop/users", userRoutes);
 app.use("/cakeshop/upload", uploadFileRoutes);
 
+// PayPal API
+app.use("/cakeshop/config/paypal", (req, res) =>
+  res.send(process.env.PAYPAL_CLIENT_ID)
+);
+
 const PORT = process.env.PORT || 5000;
+
 app.listen(
   PORT,
   console.log(

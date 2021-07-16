@@ -152,7 +152,7 @@ export const processOrderPayment =
       };
 
       const { data } = await axios.put(
-        `/cakeshop/orders/${orderId}/pay`,
+        `/cakeshop/orders/${orderId}/payment`,
         paymentResult,
         config
       );

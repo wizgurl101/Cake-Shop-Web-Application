@@ -104,7 +104,6 @@ const updateOrderToDelivered = asyncHandler(async (req, res) => {
   // if order exist, update it to delivered
   if (order) {
     order.isDelivered = true;
-    order.deliveredAt = Date.now();
 
     const deliveredOrder = await order.save();
     res.json(deliveredOrder);
