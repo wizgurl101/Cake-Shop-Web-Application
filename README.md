@@ -24,4 +24,4 @@ This project was based the one built in Brad Traversy's MERN sCommerce Udemy cou
 - Application of JSON web token for authorization purpose
 - Using React-Bootstrap library to rapidly build UI
 - Using Postman for API testing
-- Using MongoDB Compass to interact with the database via GUI
+- Using MongoDB Compass to interact with the database
