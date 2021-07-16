@@ -2,10 +2,10 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Row, Col, ListGroup, Image, Card, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import axios from "axios";
+// import axios from "axios";
 import Message from "../../components/Message";
 import Loader from "../../components/Loader";
-import { addZeroAtEnd } from "../../helpers/PriceSizeHelpers";
+// import { addZeroAtEnd } from "../../helpers/PriceSizeHelpers";
 import { getOrderDetails } from "../../actions/orderActions";
 
 const OrderDetailScreen = ({ match, history }) => {
@@ -37,13 +37,13 @@ const OrderDetailScreen = ({ match, history }) => {
   }, [history, userInfo, order]);
 
   // FUNCTIONS
-  const setDeliverStatusHandler = () => {
-    console.log("order been delivered");
-  };
+  // const setDeliverStatusHandler = () => {
+  //   console.log("order been delivered");
+  // };
 
-  const setPaymentStatusHandler = () => {
-    console.log("order been paid");
-  };
+  // const setPaymentStatusHandler = () => {
+  //   console.log("order been paid");
+  // };
 
   return loading ? (
     <Loader />

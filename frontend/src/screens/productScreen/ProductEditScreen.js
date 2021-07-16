@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Form, Button } from "react-bootstrap";
+import { Form, Button, Image } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Message from "../../components/Message";
 import Loader from "../../components/Loader";
@@ -132,32 +132,28 @@ const ProductEditScreen = ({ match, history }) => {
 
             <Form.Group controlId="image">
               <Form.Label>Image</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Enter image url"
-                value={image}
-                onChange={(event) => setImage(event.target.value)}
-              ></Form.Control>
+              <Image src={image} fluid />
+              <h6>Upload New Image</h6>
               <Form.File
                 id="image-file"
-                label="Upload image"
                 custom
                 onChange={uploadImageFileHandler}
               ></Form.File>
             </Form.Group>
 
             <Form.Group controlId="description">
-              <Form.Label>description</Form.Label>
+              <Form.Label>Description</Form.Label>
               <Form.Control
-                type="text"
+                as="textarea"
                 placeholder="Enter product description"
                 value={description}
+                rows={5}
                 onChange={(event) => setDescription(event.target.value)}
               ></Form.Control>
             </Form.Group>
 
             <Form.Group controlId="category">
-              <Form.Label>category</Form.Label>
+              <Form.Label>Category</Form.Label>
               <Form.Control
                 type="text"
                 placeholder="Enter product category"
