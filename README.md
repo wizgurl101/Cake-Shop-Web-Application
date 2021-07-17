@@ -25,3 +25,26 @@ This project was based on the one built in Brad Traversy's MERN sCommerce Udemy 
 - Using React-Bootstrap library to rapidly build UI
 - Using Postman for API testing
 - Using MongoDB Compass to interact with the database
+
+## Screenshots
+<p align="center">
+<img src="./Delightful_Sweet1.jpg" width="80%">
+</p>
+<p align="center">
+<img src="./Delightful_Sweet2.jpg" width="80%">
+</p>
+<p align="center">
+<img src="./Delightful_Sweet3.jpg" width="80%">
+</p>
+<p align="center">
+<img src="./Delightful_Sweet4.jpg" width="80%">
+</p>
+<p align="center">
+<img src="./Delightful_Sweet5.jpg" width="80%">
+</p>
+<p align="center">
+<img src="./Delightful_Sweet6.jpg" width="80%">
+</p>
+<p align="center">
+<img src="./Delightful_Sweet7.jpg" width="80%">
+</p>
