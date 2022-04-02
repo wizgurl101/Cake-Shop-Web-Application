@@ -1,5 +1,5 @@
-import asyncHandler from "express-async-handler";
-import Order from "../models/orderModel.js";
+import asyncHandler from 'express-async-handler';
+import Order from '../models/orderModel.js';
 
 /**
  * @desc Create a new order
@@ -7,23 +7,13 @@ import Order from "../models/orderModel.js";
  * @access Private
  */
 const createOrder = asyncHandler(async (req, res) => {
-  const {
-    orderItems,
-    shippingAddress,
-    paymentMethod,
-    deliveryDate,
-    itemsPrice,
-    taxPrice,
-    shippingPrice,
-    totalPrice,
-  } = req.body;
+  const { orderItems, shippingAddress, paymentMethod, deliveryDate, itemsPrice, taxPrice, shippingPrice, totalPrice } = req.body;
 
   // check that cart is not empty
   if (orderItems && orderItems.length === 0) {
     // bad request
     res.status(400);
-    throw new Error("No item in cart.");
-    return;
+    throw new Error('No item in cart.');
   } else {
     // create a new order and persist it to the DB
     const order = new Order({
@@ -49,17 +39,14 @@ const createOrder = asyncHandler(async (req, res) => {
  * @access Private
  */
 const getOrderById = asyncHandler(async (req, res) => {
-  const order = await Order.findById(req.params.id).populate(
-    "user",
-    "name email"
-  );
+  const order = await Order.findById(req.params.id).populate('user', 'name email');
 
   // check if order exist
   if (order) {
     res.json(order);
   } else {
     res.status(404);
-    throw new Error("Order not found");
+    throw new Error('Order not found');
   }
 });
 
@@ -89,7 +76,7 @@ const updateOrderToPaid = asyncHandler(async (req, res) => {
   } else {
     // order was not found
     res.status(404);
-    throw new Error("Order not found");
+    throw new Error('Order not found');
   }
 });
 
@@ -110,7 +97,7 @@ const updateOrderToDelivered = asyncHandler(async (req, res) => {
   } else {
     // order was not found
     res.status(404);
-    throw new Error("Order not found");
+    throw new Error('Order not found');
   }
 });
 
@@ -130,15 +117,8 @@ const getUserOrders = asyncHandler(async (req, res) => {
  * @access Private/Admin
  */
 const getOrders = asyncHandler(async (req, res) => {
-  const allOrders = await Order.find({}).populate("user", "id name");
+  const allOrders = await Order.find({}).populate('user', 'id name');
   res.json(allOrders);
 });
 
-export {
-  createOrder,
-  getOrderById,
-  updateOrderToPaid,
-  updateOrderToDelivered,
-  getUserOrders,
-  getOrders,
-};
+export { createOrder, getOrderById, updateOrderToPaid, updateOrderToDelivered, getUserOrders, getOrders };
