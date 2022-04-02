@@ -10,7 +10,7 @@ This is a web application that allow users to create an account with a fictional
 
 ## About the project
 
-This project was based on the one built in Brad Traversy's MERN sCommerce Udemy course that I took. This is meant for me to apply and practice what I learnt to make a full-stack web application using the following technologies:
+Learn about making a full-stack web application using the following technologies:
 
 - Node.js
 - Express

@@ -1,6 +1,9 @@
 import {
+  SIZE_LARGE_ABBREVIATION,
   SIZE_LARGE_PRICE,
+  SIZE_MEDIUM_ABBREVIATION,
   SIZE_MEDIUM_PRICE,
+  SIZE_SMALL_ABBREVIATION,
   SIZE_SMALL_PRICE,
 } from "../constants/priceConstants";
 
@@ -10,22 +13,16 @@ import {
  * @returns price of the product
  */
 export const determinePrice = (size) => {
-  let price = 0;
   switch (size) {
-    case "sm":
-      price = SIZE_SMALL_PRICE;
-      break;
-    case "med":
-      price = SIZE_MEDIUM_PRICE;
-      break;
-    case "lg":
-      price = SIZE_LARGE_PRICE;
-      break;
+    case SIZE_SMALL_ABBREVIATION:
+      return SIZE_SMALL_PRICE;
+    case SIZE_MEDIUM_ABBREVIATION:
+      return SIZE_MEDIUM_PRICE;
+    case SIZE_LARGE_ABBREVIATION:
+      return SIZE_LARGE_PRICE;
     default:
-      console.error("invalid size");
+      return 0;
   }
-
-  return price;
 };
 
 /**
@@ -34,23 +31,16 @@ export const determinePrice = (size) => {
  * @returns size of the product user ordered
  */
 export const determineSize = (price) => {
-  let size = "";
-
   switch (price) {
     case SIZE_SMALL_PRICE:
-      size = "sm";
-      break;
+      return SIZE_SMALL_ABBREVIATION;
     case SIZE_MEDIUM_PRICE:
-      size = "med";
-      break;
+      return SIZE_MEDIUM_ABBREVIATION;
     case SIZE_LARGE_PRICE:
-      size = "lg";
-      break;
+      return SIZE_LARGE_ABBREVIATION;
     default:
-      console.error("invalid price");
+      return "";
   }
-
-  return size;
 };
 
 /**
