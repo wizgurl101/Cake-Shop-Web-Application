@@ -1,23 +1,23 @@
-import { BrowserRouter as Router, Route } from "react-router-dom";
-import { Container } from "react-bootstrap";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
-import HomeScreen from "./screens/HomeScreen";
-import LoginScreen from "./screens/LoginScreen";
-import RegisterScreen from "./screens/RegisterScreen";
-import CartScreen from "./screens/CartScreen";
-import ShippingScreen from "./screens/checkoutScreen/ShippingScreen";
-import DeliveryScreen from "./screens/checkoutScreen/DeliveryScreen";
-import PaymentScreen from "./screens/checkoutScreen/PaymentScreen";
-import SummaryScreen from "./screens/checkoutScreen/SummaryScreen";
-import OrderDetailScreen from "./screens/orderScreen/OrderDetailScreen";
-import OrderListScreen from "./screens/orderScreen/OrderListScreen";
-import UserListScreen from "./screens/userScreen/UserListScreen";
-import UserEditScreen from "./screens/userScreen/UserEditScreen";
-import UserProfileScreen from "./screens/userScreen/UserProfileScreen";
-import ProductListScreen from "./screens/productScreen/ProductListScreen";
-import ProductEditScreen from "./screens/productScreen/ProductEditScreen";
-import ProductDetailScreen from "./screens/productScreen/ProductDetailScreen";
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { Container } from 'react-bootstrap';
+import Header from './components/Header';
+import Footer from './components/Footer';
+import HomeScreen from './screens/HomeScreen';
+import LoginScreen from './screens/LoginScreen';
+import RegisterScreen from './screens/RegisterScreen';
+import CartScreen from './screens/CartScreen';
+import ShippingScreen from './screens/checkoutScreen/ShippingScreen';
+import DeliveryScreen from './screens/checkoutScreen/DeliveryScreen';
+import PaymentScreen from './screens/checkoutScreen/PaymentScreen';
+import SummaryScreen from './screens/checkoutScreen/SummaryScreen';
+import OrderDetailScreen from './screens/orderScreen/OrderDetailScreen';
+import OrderListScreen from './screens/orderScreen/OrderListScreen';
+import UserListScreen from './screens/userScreen/UserListScreen';
+import UserEditScreen from './screens/userScreen/UserEditScreen';
+import UserProfileScreen from './screens/userScreen/UserProfileScreen';
+import ProductListScreen from './screens/productScreen/ProductListScreen';
+import ProductEditScreen from './screens/productScreen/ProductEditScreen';
+import ProductDetailScreen from './screens/productScreen/ProductDetailScreen';
 
 const App = () => {
   return (
