@@ -1,4 +1,4 @@
-import { CART_ADD_ITEM, CART_REMOVE_ITEM, CART_SAVE_DELIVERY_DATE, CART_SAVE_PAYMENT_METHOD, CART_SAVE_SHIPPING_ADDRESS } from '../constants/cartConstants.js';
+import { CART_ADD_ITEM, CART_REMOVE_ITEM, CART_SAVE_DELIVERY_DATE, CART_SAVE_PAYMENT_METHOD, CART_SAVE_SHIPPING_ADDRESS } from '../constants/cartConstants';
 
 // TODO remove ts-ignore and refactor
 

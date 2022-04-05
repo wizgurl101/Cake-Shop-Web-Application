@@ -1,6 +1,5 @@
-import React from 'react';
 import axios from 'axios';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Form, Button, Image } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
@@ -96,10 +95,12 @@ const ProductEditScreen: React.FC = ({ match, history }) => {
         <h1>Edit Product</h1>
         {loadingUpdate && <Loader />}
         {uploading && <Loader />}
+        {/* @ts-ignore */}
         {errorUpdate && <Message variant="danger">{errorUpdate}</Message>}
         {loading ? (
           <Loader />
         ) : error ? (
+          // @ts-ignore
           <Message variant="danger">{error}</Message>
         ) : (
           <Form onSubmit={submitHandler}>

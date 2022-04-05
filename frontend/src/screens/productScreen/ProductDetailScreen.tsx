@@ -1,5 +1,4 @@
-import React from 'react';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Row, Col, Image, ListGroup, Card, Button, Form } from 'react-bootstrap';
@@ -9,12 +8,12 @@ import MetaData from '../../components/MetaData';
 import Rating from '../../components/Rating';
 import { listProductDetails, createProductReview } from '../../actions/productActions';
 import { PRODUCT_CREATE_REVIEW_RESET } from '../../constants/productConstants';
-import { SIZE_SMALL_PRICE, SIZE_MEDIUM_PRICE, SIZE_LARGE_PRICE } from '../../constants/priceConstants.js';
+import { SIZE_SMALL_PRICE, SIZE_MEDIUM_PRICE, SIZE_LARGE_PRICE } from '../../constants/priceConstants';
 
 // TODO remove ts-config and refactor
 
 // @ts-ignore
-const ProductDetailScreen = ({ history, match }) => {
+const ProductDetailScreen: React.FC = ({ history, match }) => {
   const dispatch = useDispatch();
 
   const [qty, setQty] = useState(1);
@@ -86,6 +85,7 @@ const ProductDetailScreen = ({ history, match }) => {
       {loading ? (
         <Loader />
       ) : error ? (
+        // @ts-ignore
         <Message variant="danger">{error}</Message>
       ) : (
         <>
@@ -194,7 +194,9 @@ const ProductDetailScreen = ({ history, match }) => {
               <ListGroup.Item>
                 <h2>Write a Customer Review</h2>
                 {loadingProductReview && <Loader />}
+                {/* @ts-ignore */}
                 {successProductReview && <Message variant="success">Review submitted successfully</Message>}
+                {/* @ts-ignore */}
                 {errorProductReview && <Message variant="danger">{errorProductReview}</Message>}
                 {userInfo ? (
                   <Form onSubmit={submitHandler}>

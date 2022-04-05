@@ -38,8 +38,8 @@ const UserProfileScreen: React.FC = () => {
   useEffect(
     () => {
       if (!userInfo) {
-        // eslint-disable-next-line no-restricted-globals
         // @ts-ignore
+        // eslint-disable-next-line no-restricted-globals
         history.push('/login');
       } else {
         // get user details
@@ -79,8 +79,11 @@ const UserProfileScreen: React.FC = () => {
     <Row>
       <Col md={3}>
         <h2>{user.name} Profile</h2>
+        {/* @ts-ignore */}
         {message && <Message variant="danger">{message}</Message>}
+        {/* @ts-ignore */}
         {error && <Message variant="danger">{error}</Message>}
+        {/* @ts-ignore */}
         {successUpdatedProfile && <Message variant="success">Profile Updated</Message>}
         {loading && <Loader />}
         <Form onSubmit={submitHandler}>
@@ -114,6 +117,7 @@ const UserProfileScreen: React.FC = () => {
         {loadingUserOrdersList ? (
           <Loader />
         ) : errorUserOrdersList ? (
+          // @ts-ignore
           <Message variant="danger">{errorUserOrdersList}</Message>
         ) : (
           <Table striped bordered hover responsive className="table-sm">

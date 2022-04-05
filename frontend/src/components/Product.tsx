@@ -5,7 +5,7 @@ import { Card } from 'react-bootstrap';
 // TODO remove ts-ignore and refactor
 
 // @ts-ignore
-const Product = ({ product }) => {
+const Product: React.FC = ({ product }) => {
   return (
     <Card className="my-3 p-3 rounded">
       <Link to={`/product/${product._id}`}>

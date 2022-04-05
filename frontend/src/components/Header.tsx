@@ -63,6 +63,7 @@ const Header: React.FC = () => {
               <strong>Delightful Sweets</strong>
             </Navbar.Brand>
           </LinkContainer>
+          {/* @ts-ignore */}
           <Route render={({ history }) => <SearchBox history={history} />} />
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav" />

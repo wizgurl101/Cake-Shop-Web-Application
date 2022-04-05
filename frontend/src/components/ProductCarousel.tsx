@@ -1,5 +1,4 @@
-import React from 'react';
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Carousel, Image } from 'react-bootstrap';
@@ -24,6 +23,7 @@ const ProductCarousel: React.FC = () => {
   return loading ? (
     <Loader />
   ) : error ? (
+    // @ts-ignore
     <Message variant="danger">{error}</Message>
   ) : (
     <Carousel pause="hover" className="bg-dark">

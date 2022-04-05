@@ -1,5 +1,4 @@
-import React from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import FormContainer from '../../components/FormContainer';
@@ -9,7 +8,7 @@ import { saveShippingAddress } from '../../actions/cartActions';
 // TODO remove ts-ignore and refactor
 
 // @ts-ignore
-const ShippingScreen = ({ history }) => {
+const ShippingScreen: React.FC = ({ history }) => {
   const dispatch = useDispatch();
 
   // @ts-ignore

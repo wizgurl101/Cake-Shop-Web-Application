@@ -1,5 +1,4 @@
-import React from 'react';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Row, Col, ListGroup, Image, Card, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
@@ -91,6 +90,7 @@ const OrderDetailScreen: React.FC = ({ match, history }) => {
   return loading ? (
     <Loader />
   ) : error ? (
+    // @ts-ignore
     <Message variant="danger">{error}</Message>
   ) : (
     <>
@@ -111,8 +111,10 @@ const OrderDetailScreen: React.FC = ({ match, history }) => {
                 {order.shippingAddress.address}, {order.shippingAddress.city} {order.shippingAddress.postalCode}, {order.shippingAddress.country}
               </p>
               {order.isDelivered ? (
+                // @ts-ignore
                 <Message variant="success">Delivered on {order.deliveryDate.substring(0, 10)}</Message>
               ) : (
+                // @ts-ignore
                 <Message variant="danger">
                   <strong>Not Delivered </strong>- Delivery Date: {order.deliveryDate.substring(0, 10)}
                 </Message>
@@ -125,6 +127,7 @@ const OrderDetailScreen: React.FC = ({ match, history }) => {
                 <strong>Method: </strong>
                 {order.paymentMethod}
               </p>
+              {/* @ts-ignore */}
               {order.isPaid ? <Message variant="success">Paid on {order.paidAt.substring(0, 10)}</Message> : <Message variant="danger">Not Paid</Message>}
             </ListGroup.Item>
 

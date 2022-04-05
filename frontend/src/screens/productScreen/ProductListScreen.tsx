@@ -1,12 +1,11 @@
-import React from 'react';
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Table, Button, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import Message from '../../components/Message.js';
-import Loader from '../../components/Loader.js';
-import { listProducts, deleteProduct, createProduct } from '../../actions/productActions.js';
-import { PRODUCT_CREATE_RESET } from '../../constants/productConstants.js';
+import Message from '../../components/Message';
+import Loader from '../../components/Loader';
+import { listProducts, deleteProduct, createProduct } from '../../actions/productActions';
+import { PRODUCT_CREATE_RESET } from '../../constants/productConstants';
 
 // TODO remove ts-ignore and refactor
 
@@ -70,6 +69,7 @@ const ProductListScreen: React.FC = ({ history }) => {
         </Col>
       </Row>
       {loadingDelete && <Loader />}
+      {/* @ts-ignore */}
       {errorDelete && <Message variant="danger">{errorDelete}</Message>}
       {loadingCreate && <Loader />}
       {/* @ts-ignore */}
@@ -77,6 +77,7 @@ const ProductListScreen: React.FC = ({ history }) => {
       {loading ? (
         <Loader />
       ) : error ? (
+        // @ts-ignore
         <Message variant="danger">{error}</Message>
       ) : (
         <>

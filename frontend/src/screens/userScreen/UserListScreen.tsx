@@ -45,6 +45,7 @@ const UserListScreen: React.FC = ({ history }) => {
       {loading ? (
         <Loader />
       ) : error ? (
+        // @ts-ignore
         <Message variant="danger">{error}</Message>
       ) : (
         <Table striped bordered hover responsive className="table-sm">

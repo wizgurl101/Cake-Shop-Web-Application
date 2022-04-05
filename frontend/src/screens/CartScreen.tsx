@@ -2,15 +2,15 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Row, Col, ListGroup, Image, Form, Button, Card } from 'react-bootstrap';
-import Message from '../components/Message.js';
+import Message from '../components/Message';
 import { addToCart, removeFromCart } from '../actions/cartActions';
-import { SIZE_SMALL_PRICE } from '../constants/priceConstants.js';
-import { determinePrice, determineSize } from '../helpers/PriceSizeHelpers.js';
+import { SIZE_SMALL_PRICE } from '../constants/priceConstants';
+import { determinePrice, determineSize } from '../helpers/PriceSizeHelpers';
 
 // TODO remove ts-ignore and refactor
 
 // @ts-ignore
-const CartScreen = ({ match, location, history }) => {
+const CartScreen: React.FC = ({ match, location, history }) => {
   const dispatch = useDispatch();
   const productId = match.params.id;
 

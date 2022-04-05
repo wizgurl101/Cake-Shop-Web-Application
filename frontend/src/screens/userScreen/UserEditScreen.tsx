@@ -64,10 +64,12 @@ const UserEditScreen: React.FC = ({ match, history }) => {
       <FormContainer>
         <h1>Edit User</h1>
         {loadingUpdate && <Loader />}
+        {/* @ts-ignore */}
         {errorUpdate && <Message variant="danger">{errorUpdate}</Message>}
         {loading ? (
           <Loader />
         ) : error ? (
+          // @ts-ignore
           <Message variant="danger">{error}</Message>
         ) : (
           <Form onSubmit={submitHandler}>
@@ -82,6 +84,7 @@ const UserEditScreen: React.FC = ({ match, history }) => {
             </Form.Group>
 
             <Form.Group controlId="isadmin">
+              {/* @ts-ignore */}
               <Form.Check type="checkbox" label="Is Admin" checked={isAdmin} onChange={(e) => setIsAdmin(e.target.value)}></Form.Check>
             </Form.Group>
 

@@ -45,12 +45,14 @@ const HomeScreen: React.FC = ({ match }) => {
       {loading ? (
         <Loader />
       ) : error ? (
+        // @ts-ignore
         <Message variant="danger">{error}</Message>
       ) : (
         <Row>
           {/* @ts-ignore */}
           {products.map((product) => (
             <Col key={product._id} sm={12} md={6} lg={4} xl={3}>
+              {/* @ts-ignore */}
               <Product product={product} />
             </Col>
           ))}

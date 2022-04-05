@@ -1,5 +1,4 @@
-import React from 'react';
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Button, Row, Col, ListGroup, Image, Card } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -142,6 +141,7 @@ const SummaryScreen: React.FC = ({ history }) => {
                 </Row>
               </ListGroup.Item>
 
+              {/* @ts-ignore */}
               <ListGroup.Item>{error && <Message variant="danger">{error}</Message>}</ListGroup.Item>
 
               <ListGroup.Item>
