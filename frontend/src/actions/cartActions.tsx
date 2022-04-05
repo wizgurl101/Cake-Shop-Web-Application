@@ -1,12 +1,15 @@
 import axios from 'axios';
 import { CART_ADD_ITEM, CART_REMOVE_ITEM, CART_SAVE_DELIVERY_DATE, CART_SAVE_PAYMENT_METHOD, CART_SAVE_SHIPPING_ADDRESS } from '../constants/cartConstants';
 
+// TODO remove ts-ignore and refactor
+
 /**
  * Add product to cart
  * @param {*} id Product id to be add to cart
  * @param {*} qty Quantity of product order
  * @returns
  */
+// @ts-ignore
 export const addToCart = (id, qty, size, price) => async (dispatch, getState) => {
   const { data } = await axios.get(`/cakeshop/products/${id}`);
 
@@ -31,6 +34,7 @@ export const addToCart = (id, qty, size, price) => async (dispatch, getState) =>
  * @param {*} id
  * @returns
  */
+// @ts-ignore
 export const removeFromCart = (id) => (dispatch, getState) => {
   dispatch({
     type: CART_REMOVE_ITEM,
@@ -45,6 +49,7 @@ export const removeFromCart = (id) => (dispatch, getState) => {
  * @param {*} shippingAddress
  * @returns
  */
+// @ts-ignore
 export const saveShippingAddress = (shippingAddress) => (dispatch) => {
   dispatch({
     type: CART_SAVE_SHIPPING_ADDRESS,
@@ -59,6 +64,7 @@ export const saveShippingAddress = (shippingAddress) => (dispatch) => {
  * @param {*} deliveryDate
  * @returns
  */
+// @ts-ignore
 export const saveDeliveryDate = (deliveryDate) => (dispatch) => {
   dispatch({
     type: CART_SAVE_DELIVERY_DATE,
@@ -73,6 +79,7 @@ export const saveDeliveryDate = (deliveryDate) => (dispatch) => {
  * @param {*} paymentMethod
  * @returns
  */
+// @ts-ignore
 export const savePaymentMethod = (paymentMethod) => (dispatch) => {
   dispatch({
     type: CART_SAVE_PAYMENT_METHOD,

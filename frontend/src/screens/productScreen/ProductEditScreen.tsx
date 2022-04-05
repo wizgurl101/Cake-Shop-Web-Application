@@ -1,3 +1,4 @@
+import React from 'react';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
@@ -9,33 +10,32 @@ import FormContainer from '../../components/FormContainer';
 import { listProductDetails, updateProduct } from '../../actions/productActions';
 import { PRODUCT_DETAILS_RESET, PRODUCT_UPDATE_RESET } from '../../constants/productConstants';
 
-const ProductEditScreen = ({ match, history }) => {
+// TODO remove ts-ignore and refactor
+
+// @ts-ignore
+const ProductEditScreen: React.FC = ({ match, history }) => {
   const dispatch = useDispatch();
   const productId = match.params.id;
 
-  // product state variables
   const [name, setName] = useState('');
   const [image, setImage] = useState('');
   const [description, setDescription] = useState('');
   const [category, setCategory] = useState('');
   const [uploading, setUploading] = useState(false);
 
-  // get product details
+  // @ts-ignore
   const productDetails = useSelector((state) => state.productDetails);
   const { loading, error, product } = productDetails;
 
-  // update product
+  // @ts-ignores
   const productUpdated = useSelector((state) => state.productUpdate);
   const { loading: loadingUpdate, error: errorUpdate, success: successUpdate } = productUpdated;
 
   useEffect(() => {
-    // if product was successfully updated
     if (successUpdate) {
-      // reset product update and details
       dispatch({ type: PRODUCT_UPDATE_RESET });
       dispatch({ type: PRODUCT_DETAILS_RESET });
 
-      // redirect user back to productlist
       history.push('/admin/productlist');
     } else {
       // if product does not match id in URL
@@ -51,21 +51,17 @@ const ProductEditScreen = ({ match, history }) => {
     }
   }, [dispatch, history, productId, product, successUpdate]);
 
-  // FUNCTIONS
+  // @ts-ignore
   const uploadImageFileHandler = async (event) => {
     // get the file upload by user
     const imageFile = event.target.files[0];
     const formData = new FormData();
     formData.append('image', imageFile);
-
-    // have spinner component appears when uploading file
     setUploading(true);
 
     // request to backend
     try {
       const config = { headers: { 'Content-Type': 'multipart/form-data' } };
-
-      // get the file path to the image uploaded
       const { data } = await axios.post('/cakeshop/upload', formData, config);
 
       setImage(data);
@@ -76,9 +72,10 @@ const ProductEditScreen = ({ match, history }) => {
     }
   };
 
+  // @ts-ignore
   const submitHandler = (event) => {
     event.preventDefault();
-    // update product
+
     dispatch(
       updateProduct({
         _id: productId,

@@ -22,6 +22,9 @@ import {
   ORDER_PAYMENT_SUCCESS,
 } from '../constants/orderConstants';
 
+// TODO remove ts-ignore and refactor
+
+// @ts-ignore
 export const orderCreateReducer = (state = {}, action) => {
   switch (action.type) {
     case ORDER_CREATE_REQUEST:
@@ -41,6 +44,7 @@ export const orderDetailsReducer = (
     orderitems: [],
     shippingAddress: {},
   },
+  // @ts-ignore
   action,
 ) => {
   switch (action.type) {
@@ -55,6 +59,7 @@ export const orderDetailsReducer = (
   }
 };
 
+// @ts-ignore
 export const orderListUserReducer = (state = { orders: [] }, action) => {
   switch (action.type) {
     case ORDER_LIST_USER_REQUEST:
@@ -70,6 +75,7 @@ export const orderListUserReducer = (state = { orders: [] }, action) => {
   }
 };
 
+// @ts-ignore
 export const orderListAdminReducer = (state = { orders: [] }, action) => {
   switch (action.type) {
     case ORDER_LIST_ADMIN_REQUEST:
@@ -83,6 +89,7 @@ export const orderListAdminReducer = (state = { orders: [] }, action) => {
   }
 };
 
+// @ts-ignore
 export const orderPaymentReducer = (state = {}, action) => {
   switch (action.type) {
     case ORDER_PAYMENT_REQUEST:
@@ -98,6 +105,7 @@ export const orderPaymentReducer = (state = {}, action) => {
   }
 };
 
+// @ts-ignore
 export const orderDeliveryReducer = (state = {}, action) => {
   switch (action.type) {
     case ORDER_DELIVERY_REQUEST:

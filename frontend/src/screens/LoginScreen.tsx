@@ -7,12 +7,16 @@ import Loader from '../components/Loader.js';
 import FormContainer from '../components/FormContainer.js';
 import { login } from '../actions/userActions.js';
 
-const LoginScreen = ({ location, history }) => {
+// TODO remove ts-ignore and refactor
+
+// @ts-ignore
+const LoginScreen: React.FC = ({ location, history }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const dispatch = useDispatch();
 
+  // @ts-ignore
   const userLogin = useSelector((state) => state.userLogin);
   const { loading, error, userInfo } = userLogin;
 
@@ -25,6 +29,7 @@ const LoginScreen = ({ location, history }) => {
     }
   }, [history, userInfo, redirect]);
 
+  // @ts-ignore
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(login(email, password));

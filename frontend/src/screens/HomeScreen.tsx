@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
@@ -10,11 +10,15 @@ import Message from '../components/Message';
 import { listProducts } from '../actions/productActions';
 import ProductCarousel from '../components/ProductCarousel';
 
-const HomeScreen = ({ match }) => {
+// TODO remove ts-ignore and refactor
+
+// @ts-ignore
+const HomeScreen: React.FC = ({ match }) => {
   const dispatch = useDispatch();
 
   const searchProduct = match.params.searchProduct;
 
+  // @ts-ignore
   const productList = useSelector((state) => state.productList);
   const { loading, error, products } = productList;
 
@@ -44,6 +48,7 @@ const HomeScreen = ({ match }) => {
         <Message variant="danger">{error}</Message>
       ) : (
         <Row>
+          {/* @ts-ignore */}
           {products.map((product) => (
             <Col key={product._id} sm={12} md={6} lg={4} xl={3}>
               <Product product={product} />

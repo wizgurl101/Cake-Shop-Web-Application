@@ -21,6 +21,9 @@ import {
   ORDER_PAYMENT_SUCCESS,
 } from '../constants/orderConstants';
 
+// TODO remove ts-ignore and refactor
+
+// @ts-ignore
 export const createOrder = (newOrder) => async (dispatch, getState) => {
   try {
     dispatch({ type: ORDER_CREATE_REQUEST });
@@ -43,11 +46,13 @@ export const createOrder = (newOrder) => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: ORDER_CREATE_FAIL,
+      // @ts-ignore
       payload: error.response && error.response.data.message ? error.response.data.message : error.message,
     });
   }
 };
 
+// @ts-ignore
 export const getOrderDetails = (orderId) => async (dispatch, getState) => {
   try {
     dispatch({ type: ORDER_DETAILS_REQUEST });
@@ -68,11 +73,13 @@ export const getOrderDetails = (orderId) => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: ORDER_DETAILS_FAIL,
+      // @ts-ignore
       payload: error.response && error.response.data.message ? error.response.data.message : error.message,
     });
   }
 };
 
+// @ts-ignore
 export const listUserOrders = () => async (dispatch, getState) => {
   try {
     dispatch({ type: ORDER_LIST_USER_REQUEST });
@@ -93,11 +100,13 @@ export const listUserOrders = () => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: ORDER_LIST_USER_FAIL,
+      // @ts-ignore
       payload: error.response && error.response.data.message ? error.response.data.message : error.message,
     });
   }
 };
 
+// @ts-ignore
 export const listAllOrders = () => async (dispatch, getState) => {
   try {
     dispatch({ type: ORDER_LIST_ADMIN_REQUEST });
@@ -118,11 +127,13 @@ export const listAllOrders = () => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: ORDER_LIST_ADMIN_FAIL,
+      // @ts-ignore
       payload: error.response && error.response.data.message ? error.response.data.message : error.message,
     });
   }
 };
 
+// @ts-ignore
 export const processOrderPayment = (orderId, paymentResult) => async (dispatch, getState) => {
   try {
     dispatch({ type: ORDER_PAYMENT_REQUEST });
@@ -144,11 +155,13 @@ export const processOrderPayment = (orderId, paymentResult) => async (dispatch, 
   } catch (error) {
     dispatch({
       type: ORDER_PAYMENT_FAIL,
+      // @ts-ignore
       payload: error.response && error.response.data.message ? error.response.data.message : error.message,
     });
   }
 };
 
+// @ts-ignore
 export const changeOrderDeliveryStatus = (order) => async (dispatch, getState) => {
   try {
     dispatch({ type: ORDER_DELIVERY_REQUEST });
@@ -169,6 +182,7 @@ export const changeOrderDeliveryStatus = (order) => async (dispatch, getState) =
   } catch (error) {
     dispatch({
       type: ORDER_DELIVERY_FAIL,
+      // @ts-ignore
       payload: error.response && error.response.data.message ? error.response.data.message : error.message,
     });
   }

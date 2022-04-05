@@ -1,3 +1,4 @@
+import React from 'react';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -10,36 +11,32 @@ import { listProductDetails, createProductReview } from '../../actions/productAc
 import { PRODUCT_CREATE_REVIEW_RESET } from '../../constants/productConstants';
 import { SIZE_SMALL_PRICE, SIZE_MEDIUM_PRICE, SIZE_LARGE_PRICE } from '../../constants/priceConstants.js';
 
-/**
- * Product Detail Screen display the product detail of a single product, allow
- * user to add the product to the cart and to leave a rating and review
- * @param
- * @returns
- */
+// TODO remove ts-config and refactor
+
+// @ts-ignore
 const ProductDetailScreen = ({ history, match }) => {
   const dispatch = useDispatch();
-  // state variables
+
   const [qty, setQty] = useState(1);
   const [price, setPrice] = useState(SIZE_SMALL_PRICE);
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState('');
 
-  // get product detail
+  // @ts-ignore
   const productDetails = useSelector((state) => state.productDetails);
   const { loading, error, product } = productDetails;
 
-  // get log in user info to show form for giving a review
+  // @ts-ignore
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
-  // get new product review
+  // @ts-ignore
   const productReviewCreate = useSelector((state) => state.productReviewCreate);
   const { loading: loadingProductReview, success: successProductReview, error: errorProductReview } = productReviewCreate;
 
   useEffect(() => {
     dispatch(listProductDetails(match.params.id));
 
-    // review for product was successfully created
     if (successProductReview) {
       alert('Review Submitted!');
       setRating(0);
@@ -48,7 +45,7 @@ const ProductDetailScreen = ({ history, match }) => {
     }
   }, [dispatch, match, successProductReview, product._id]);
 
-  // FUNCTIONS
+  // @ts-ignore
   const priceChangeHandler = (e) => {
     switch (e.target.value) {
       case 'sm':
@@ -65,14 +62,17 @@ const ProductDetailScreen = ({ history, match }) => {
     }
   };
 
+  // @ts-ignore
   const qtyChangeHandler = (e) => {
     setQty(e.target.value);
   };
 
+  // @ts-ignore
   const addToCartHandler = () => {
     history.push(`/cart/${match.params.id}?qty=${qty}&price=${price}`);
   };
 
+  // @ts-ignore
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(createProductReview(match.params.id, { rating, comment }));
@@ -89,6 +89,7 @@ const ProductDetailScreen = ({ history, match }) => {
         <Message variant="danger">{error}</Message>
       ) : (
         <>
+          {/* @ts-ignore */}
           <MetaData title={product.name} />
           {/* Product Detail Section */}
           <Row>
@@ -101,6 +102,7 @@ const ProductDetailScreen = ({ history, match }) => {
                   <h3>{product.name}</h3>
                 </ListGroup.Item>
                 <ListGroup.Item>
+                  {/* @ts-ignore */}
                   <Rating value={product.rating} text={`${product.numberOfReviews} review`} />
                 </ListGroup.Item>
                 <ListGroup.Item>Description: {product.description}</ListGroup.Item>
@@ -160,6 +162,7 @@ const ProductDetailScreen = ({ history, match }) => {
                         Add To Cart
                       </Button>
                     ) : (
+                      // @ts-ignore
                       <Message>
                         <Link to="/login">Sign in</Link> to place order
                       </Message>
@@ -173,17 +176,19 @@ const ProductDetailScreen = ({ history, match }) => {
           <Row>
             <Col md={6}>
               <h2>Reviews</h2>
+              {/* @ts-ignore */}
               {product.reviews.length === 0 && <Message>No Reviews</Message>}
               <ListGroup variant="flush">
-                {/* loop through product array of reviews */}
-                {product.reviews.map((review) => (
+                {/* @ts-ignore */}
+                {/* comment back in after refactoring to ts */}
+                {/* {product.reviews.map((review) => (
                   <ListGroup.Item key={review._id}>
                     <strong>{review.name}</strong>
                     <Rating value={review.rating} />
                     <p>{review.createAt}</p>
                     <p>{review.comment}</p>
                   </ListGroup.Item>
-                ))}
+                ))} */}
               </ListGroup>
               {/* New Review Form */}
               <ListGroup.Item>
@@ -195,6 +200,7 @@ const ProductDetailScreen = ({ history, match }) => {
                   <Form onSubmit={submitHandler}>
                     <Form.Group controlId="rating">
                       <Form.Label>Rating</Form.Label>
+                      {/* @ts-ignore */}
                       <Form.Control as="select" value={rating} onChange={(e) => setRating(e.target.value)}>
                         <option value="">Select...</option>
                         <option value="1">1 - Poor</option>
@@ -206,6 +212,7 @@ const ProductDetailScreen = ({ history, match }) => {
                     </Form.Group>
                     <Form.Group controlId="comment">
                       <Form.Label>Comment</Form.Label>
+                      {/* @ts-ignore */}
                       <Form.Control as="textarea" row="4" value={comment} onChange={(e) => setComment(e.target.value)} />
                       <Button type="submit" variant="primary">
                         Submit
@@ -213,6 +220,7 @@ const ProductDetailScreen = ({ history, match }) => {
                     </Form.Group>
                   </Form>
                 ) : (
+                  //@ts-ignore
                   <Message>
                     Please <Link to="/login">sign in</Link> to write a review
                   </Message>

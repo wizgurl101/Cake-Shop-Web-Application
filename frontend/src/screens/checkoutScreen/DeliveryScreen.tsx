@@ -1,3 +1,4 @@
+import React from 'react';
 import { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
@@ -5,19 +6,23 @@ import CheckoutProgress from '../../components/CheckoutProgress';
 import FormContainer from '../../components/FormContainer';
 import { saveDeliveryDate } from '../../actions/cartActions';
 
-const DeliveryScreen = ({ history }) => {
+// TODO remove ts-config and refactor
+
+// @ts-ignore
+const DeliveryScreen: React.FC = ({ history }) => {
   const dispatch = useDispatch();
 
+  // @ts-ignore
   const cart = useSelector((state) => state.cart);
   const { shippingAddress } = cart;
 
-  // if there is no shipping Address, re-direct to shipping screen
   if (!shippingAddress) {
     history.push('/shipping');
   }
 
   const [deliveryDate, setDeliveryDate] = useState('');
 
+  // @ts-ignore
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(saveDeliveryDate(deliveryDate));
@@ -26,6 +31,7 @@ const DeliveryScreen = ({ history }) => {
 
   return (
     <FormContainer>
+      {/* @ts-ignore */}
       <CheckoutProgress signin shipping delivery />
       <h1>Delivery Date</h1>
       <Form onSubmit={submitHandler}>

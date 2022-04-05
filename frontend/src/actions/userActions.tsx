@@ -26,6 +26,9 @@ import {
   USER_UPDATE_PROFILE_FAIL,
 } from '../constants/userConstants';
 
+// TODO remove ts-ignore and refactor
+
+// @ts-ignore
 export const login = (email, password) => async (dispatch) => {
   try {
     dispatch({ type: USER_LOGIN_REQUEST });
@@ -45,12 +48,13 @@ export const login = (email, password) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: USER_LOGIN_FAIL,
+      // @ts-ignore
       payload: error.response && error.response.data.message ? error.response.data.message : error.message,
     });
   }
 };
 
-// register a new user account
+// @ts-ignore
 export const register = (name, email, password) => async (dispatch) => {
   try {
     dispatch({ type: USER_REGISTER_REQUEST });
@@ -75,11 +79,13 @@ export const register = (name, email, password) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: USER_REGISTER_FAIL,
+      // @ts-ignore
       payload: error.response && error.response.data.message ? error.response.data.message : error.message,
     });
   }
 };
 
+// @ts-ignore
 export const logout = () => (dispatch) => {
   localStorage.removeItem('userInfo');
   localStorage.removeItem('cartItems');
@@ -92,6 +98,7 @@ export const logout = () => (dispatch) => {
   document.location.href = '/login';
 };
 
+// @ts-ignore
 export const listUsers = () => async (dispatch, getState) => {
   try {
     dispatch({ type: USER_LIST_REQUEST });
@@ -113,41 +120,40 @@ export const listUsers = () => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: USER_LIST_FAIL,
+      // @ts-ignore
       payload: error.response && error.response.data.message ? error.response.data.message : error.message,
     });
   }
 };
 
-// delete a user
+// @ts-ignore
 export const deleteUser = (id) => async (dispatch, getState) => {
   try {
     dispatch({ type: USER_DELETE_REQUEST });
 
-    // get user info from the state
     const {
       userLogin: { userInfo },
     } = getState();
 
-    // need to send authorization token in the headers
     const config = {
       headers: {
         Authorization: `Bearer ${userInfo.token}`,
       },
     };
 
-    // delete the user from database
     await axios.delete(`/cakeshop/users/${id}`, config);
 
     dispatch({ type: USER_DELETE_SUCCESS });
   } catch (error) {
     dispatch({
       type: USER_DELETE_FAIL,
+      // @ts-ignore
       payload: error.response && error.response.data.message ? error.response.data.message : error.message,
     });
   }
 };
 
-// update user information from admin user list screen
+// @ts-ignore
 export const updateUser = (user) => async (dispatch, getState) => {
   try {
     dispatch({ type: USER_UPDATE_REQUEST });
@@ -175,11 +181,13 @@ export const updateUser = (user) => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: USER_UPDATE_FAIL,
+      // @ts-ignore
       payload: error.response && error.response.data.message ? error.response.data.message : error.message,
     });
   }
 };
 
+// @ts-ignore
 export const getUserDetails = (id) => async (dispatch, getState) => {
   try {
     dispatch({ type: USER_DETAILS_REQUEST });
@@ -204,11 +212,13 @@ export const getUserDetails = (id) => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: USER_DETAILS_FAIL,
+      // @ts-ignore
       payload: error.response && error.response.data.message ? error.response.data.message : error.message,
     });
   }
 };
 
+// @ts-ignore
 export const updateUserProfile = (user) => async (dispatch, getState) => {
   try {
     dispatch({ type: USER_UPDATE_PROFILE_REQUEST });
@@ -230,6 +240,7 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: USER_UPDATE_PROFILE_FAIL,
+      // @ts-ignore
       payload: error.response && error.response.data.message ? error.response.data.message : error.message,
     });
   }

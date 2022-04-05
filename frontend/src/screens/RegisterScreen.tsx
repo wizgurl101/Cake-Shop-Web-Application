@@ -7,7 +7,10 @@ import Loader from '../components/Loader.js';
 import FormContainer from '../components/FormContainer.js';
 import { register } from '../actions/userActions.js';
 
-const RegisterScreen = ({ history, location }) => {
+// TODO remove ts-ignore and refactor
+
+// @ts-ignore
+const RegisterScreen: React.FC = ({ history, location }) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -16,6 +19,7 @@ const RegisterScreen = ({ history, location }) => {
 
   const dispatch = useDispatch();
 
+  // @ts-ignore
   const userRegister = useSelector((state) => state.userRegister);
   const { loading, error, userInfo } = userRegister;
 
@@ -27,10 +31,12 @@ const RegisterScreen = ({ history, location }) => {
     }
   }, [history, userInfo, redirect]);
 
+  // @ts-ignore
   const submitHandler = (e) => {
     e.preventDefault();
 
     if (password !== confirmPassword) {
+      // @ts-ignore
       setMessage('Passwords do not match');
     } else {
       dispatch(register(name, email, password));

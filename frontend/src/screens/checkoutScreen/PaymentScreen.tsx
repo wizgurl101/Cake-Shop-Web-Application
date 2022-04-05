@@ -1,3 +1,4 @@
+import React from 'react';
 import { useState } from 'react';
 import { Form, Button, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
@@ -5,9 +6,13 @@ import CheckoutProgress from '../../components/CheckoutProgress';
 import FormContainer from '../../components/FormContainer';
 import { savePaymentMethod } from '../../actions/cartActions';
 
-const PaymentScreen = ({ history }) => {
+// TODO remove ts-ignore and refactor
+
+// @ts-ignore
+const PaymentScreen: React.FC = ({ history }) => {
   const dispatch = useDispatch();
 
+  // @ts-ignore
   const cart = useSelector((state) => state.cart);
   const { shippingAddress, deliveryDate } = cart;
 
@@ -20,6 +25,7 @@ const PaymentScreen = ({ history }) => {
   //  set PayPal as default for future change to add more payment method options
   const [paymentMethod, setPaymentMethod] = useState('PayPal');
 
+  // @ts-ignore
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(savePaymentMethod(paymentMethod));
@@ -28,6 +34,7 @@ const PaymentScreen = ({ history }) => {
 
   return (
     <FormContainer>
+      {/* @ts-ignore */}
       <CheckoutProgress signin shipping delivery payment />
       <h1>Payment Method</h1>
       <Form onSubmit={submitHandler}>

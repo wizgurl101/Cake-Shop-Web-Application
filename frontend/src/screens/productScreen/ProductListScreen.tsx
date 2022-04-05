@@ -1,3 +1,4 @@
+import React from 'react';
 import { useEffect } from 'react';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Table, Button, Row, Col } from 'react-bootstrap';
@@ -7,34 +8,35 @@ import Loader from '../../components/Loader.js';
 import { listProducts, deleteProduct, createProduct } from '../../actions/productActions.js';
 import { PRODUCT_CREATE_RESET } from '../../constants/productConstants.js';
 
-const ProductListScreen = ({ history }) => {
+// TODO remove ts-ignore and refactor
+
+// @ts-ignore
+const ProductListScreen: React.FC = ({ history }) => {
   const dispatch = useDispatch();
 
-  // get all products
+  // @ts-ignore
   const productList = useSelector((state) => state.productList);
   const { loading, error, products } = productList;
 
-  // delete a product
+  // @ts-ignore
   const productDeleted = useSelector((state) => state.productDelete);
   const { loading: loadingDelete, error: errorDelete, success: successDelete } = productDeleted;
 
-  // create a product
+  // @ts-ignore
   const productCreated = useSelector((state) => state.productCreate);
   const { loading: loadingCreate, error: errorCreate, success: successCreate, product: createdProduct } = productCreated;
 
-  // get current log in user info
+  // @ts-ignore
   const currentUserLogin = useSelector((state) => state.userLogin);
   const { userInfo } = currentUserLogin;
 
   useEffect(() => {
-    // reset product object in state after creating a new product
     dispatch({ type: PRODUCT_CREATE_RESET });
 
     if (!userInfo || !userInfo.isAdmin) {
       history.push('/login');
     }
 
-    // if creating a new product was successful, redirect user to product edit screen
     if (successCreate) {
       history.push(`/admin/product/${createdProduct._id}/edit`);
     } else {
@@ -44,7 +46,7 @@ const ProductListScreen = ({ history }) => {
     dispatch(listProducts());
   }, [dispatch, userInfo, history, successDelete, successCreate]);
 
-  // FUNCTIONS
+  // @ts-ignore
   const deleteProductHander = (productId, productName) => {
     if (window.confirm(`Confirm deleting ${productName}?`)) {
       dispatch(deleteProduct(productId));
@@ -70,6 +72,7 @@ const ProductListScreen = ({ history }) => {
       {loadingDelete && <Loader />}
       {errorDelete && <Message variant="danger">{errorDelete}</Message>}
       {loadingCreate && <Loader />}
+      {/* @ts-ignore */}
       {errorCreate && <message variant="danger">{errorCreate}</message>}
       {loading ? (
         <Loader />
@@ -87,6 +90,7 @@ const ProductListScreen = ({ history }) => {
               </tr>
             </thead>
             <tbody>
+              {/* @ts-ignore */}
               {products.map((product) => (
                 <tr key={product._id}>
                   <td>{product._id}</td>

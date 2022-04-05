@@ -1,3 +1,4 @@
+import React from 'react';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Form, Button, Row, Col, Table } from 'react-bootstrap';
@@ -7,25 +8,30 @@ import Loader from '../../components/Loader';
 import { getUserDetails, updateUserProfile } from '../../actions/userActions';
 import { listUserOrders } from '../../actions/orderActions';
 
-const UserProfileScreen = () => {
+// TODO remove ts-ignore and refactor
+
+const UserProfileScreen: React.FC = () => {
   const dispatch = useDispatch();
 
-  // state variables for user personal info form
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [message, setMessage] = useState(null);
 
+  // @ts-ignore
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
+  // @ts-ignore
   const userDetails = useSelector((state) => state.userDetails);
   const { loading, error, user } = userDetails;
 
+  // @ts-ignore
   const userUpdatedProfile = useSelector((state) => state.userUpdatedProfile);
   const { success: successUpdatedProfile } = userUpdatedProfile;
 
+  // @ts-ignore
   const orderListUser = useSelector((state) => state.orderListUser);
   const { loading: loadingUserOrdersList, error: errorUserOrdersList, orders } = orderListUser;
 
@@ -33,6 +39,7 @@ const UserProfileScreen = () => {
     () => {
       if (!userInfo) {
         // eslint-disable-next-line no-restricted-globals
+        // @ts-ignore
         history.push('/login');
       } else {
         // get user details
@@ -50,10 +57,11 @@ const UserProfileScreen = () => {
     [dispatch, history, userInfo, user],
   );
 
-  // FUNCTION
+  // @ts-ignore
   const submitHandler = (e) => {
     e.preventDefault();
     if (password !== confirmPassword) {
+      // @ts-ignore
       setMessage('Passwords do not match');
     } else {
       dispatch(
@@ -120,6 +128,7 @@ const UserProfileScreen = () => {
               </tr>
             </thead>
             <tbody>
+              {/* @ts-ignore */}
               {orders.map((order) => (
                 <tr key={order._id}>
                   <td>{order._id}</td>

@@ -1,9 +1,14 @@
+import React from 'react';
 import { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 
-const SearchBox = ({ history }) => {
+// TODO remove ts-ignore and refactor
+
+// @ts-ignore
+const SearchBox: React.FC = ({ history }) => {
   const [searchProduct, setSearchProduct] = useState('');
 
+  // @ts-ignore
   const submitHandler = (e) => {
     e.preventDefault();
 

@@ -1,3 +1,4 @@
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Navbar, Container, Nav, NavDropdown } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
@@ -5,13 +6,15 @@ import { Route } from 'react-router-dom';
 import { logout } from '../actions/userActions';
 import SearchBox from './SearchBox';
 
-const Header = () => {
+// TODO remove ts-ignore and refactor
+
+const Header: React.FC = () => {
   const dispatch = useDispatch();
 
+  // @ts-ignore
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
-  // FUNCTIONS
   const logoutHandler = () => {
     dispatch(logout());
   };
@@ -19,6 +22,7 @@ const Header = () => {
   let userHeader = '';
   // check if user is admin to display admin header
   if (userInfo && userInfo.isAdmin) {
+    // @ts-ignore
     userHeader = (
       <NavDropdown title="Admin" id="adminmenu">
         <LinkContainer to="/profile">
@@ -39,6 +43,7 @@ const Header = () => {
   }
   // user is not admin
   if (userInfo && !userInfo.isAdmin) {
+    // @ts-ignore
     userHeader = (
       <NavDropdown title={userInfo.name} id="username">
         <LinkContainer to="/profile">

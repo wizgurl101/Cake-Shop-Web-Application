@@ -6,15 +6,21 @@ import Message from '../../components/Message';
 import Loader from '../../components/Loader';
 import { listUsers, deleteUser } from '../../actions/userActions';
 
-const UserListScreen = ({ history }) => {
+// TODO remove ts-ignore and refactor
+
+// @ts-ignore
+const UserListScreen: React.FC = ({ history }) => {
   const dispatch = useDispatch();
 
+  // @ts-ignore
   const userList = useSelector((state) => state.userList);
   const { loading, error, users } = userList;
 
+  // @ts-ignore
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
+  // @ts-ignore
   const userDelete = useSelector((state) => state.userDelete);
   const { success: successDelete } = userDelete;
 
@@ -26,6 +32,7 @@ const UserListScreen = ({ history }) => {
     }
   }, [dispatch, userInfo, history, successDelete]);
 
+  // @ts-ignore
   const deleteHandler = (id, name) => {
     if (window.confirm(`Are you sure want to delete this user: ${name}?`)) {
       dispatch(deleteUser(id));
@@ -51,6 +58,7 @@ const UserListScreen = ({ history }) => {
             </tr>
           </thead>
           <tbody>
+            {/* @ts-ignore */}
             {users.map((user) => (
               <tr key={user._id}>
                 <td>{user._id}</td>

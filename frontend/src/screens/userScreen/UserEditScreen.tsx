@@ -8,7 +8,10 @@ import FormContainer from '../../components/FormContainer';
 import { getUserDetails, updateUser } from '../../actions/userActions';
 import { USER_UPDATE_RESET } from '../../constants/userConstants';
 
-const UserEditScreen = ({ match, history }) => {
+// TODO remove ts-ignore and refactor
+
+// @ts-ignore
+const UserEditScreen: React.FC = ({ match, history }) => {
   const userId = match.params.id;
 
   const [name, setName] = useState('');
@@ -17,9 +20,11 @@ const UserEditScreen = ({ match, history }) => {
 
   const dispatch = useDispatch();
 
+  // @ts-ignore
   const userDetails = useSelector((state) => state.userDetails);
   const { loading, error, user } = userDetails;
 
+  // @ts-ignore
   const userUpdate = useSelector((state) => state.userUpdate);
   const { loading: loadingUpdate, error: errorUpdate, success: successUpdate } = userUpdate;
 
@@ -38,6 +43,7 @@ const UserEditScreen = ({ match, history }) => {
     }
   }, [dispatch, history, userId, user, successUpdate]);
 
+  // @ts-ignore
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(

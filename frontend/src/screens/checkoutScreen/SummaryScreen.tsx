@@ -1,3 +1,4 @@
+import React from 'react';
 import { useEffect } from 'react';
 import { Button, Row, Col, ListGroup, Image, Card } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
@@ -7,12 +8,17 @@ import CheckoutProgress from '../../components/CheckoutProgress';
 import { addZeroAtEnd } from '../../helpers/PriceSizeHelpers';
 import { createOrder } from '../../actions/orderActions';
 
-const SummaryScreen = ({ history }) => {
+// TODO remove ts-ignore and refactor
+
+// @ts-ignore
+const SummaryScreen: React.FC = ({ history }) => {
   const dispatch = useDispatch();
 
+  // @ts-ignore
   const cart = useSelector((state) => state.cart);
   const { cartItems, shippingAddress, deliveryDate, paymentMethod } = cart;
 
+  // @ts-ignore
   const orderCreate = useSelector((state) => state.orderCreate);
   const { order, success, error } = orderCreate;
 
@@ -32,7 +38,7 @@ const SummaryScreen = ({ history }) => {
   }, [history, success, order]);
 
   // Calculate shipping, tax and total price of order
-  cart.itemsPrice = addZeroAtEnd(cart.cartItems.reduce((acc, item) => acc + item.price * item.qty, 0));
+  cart.itemsPrice = addZeroAtEnd(cart.cartItems.reduce((acc: number, item: any): number => acc + item.price * item.qty, 0));
 
   cart.shippingPrice = addZeroAtEnd(cart.itemsPrice < 100 ? 0 : 100);
 
@@ -58,6 +64,7 @@ const SummaryScreen = ({ history }) => {
 
   return (
     <>
+      {/*  @ts-ignore */}
       <CheckoutProgress signin shipping delivery payment summary />
       <Row>
         <Col md={8}>
@@ -81,9 +88,11 @@ const SummaryScreen = ({ history }) => {
             <ListGroup.Item>
               <h2>ORDER ITEMS</h2>
               {cartItems.length === 0 ? (
+                // @ts-ignore
                 <Message>Your cart is empty</Message>
               ) : (
                 <ListGroup variant="flush">
+                  {/*  @ts-ignore */}
                   {cartItems.map((cartItem, index) => (
                     <ListGroup.Item key={index}>
                       <Row>
