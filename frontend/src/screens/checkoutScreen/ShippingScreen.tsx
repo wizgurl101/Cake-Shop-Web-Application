@@ -4,11 +4,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import FormContainer from '../../components/FormContainer';
 import CheckProgress from '../../components/CheckoutProgress';
 import { saveShippingAddress } from '../../actions/cartActions';
+import { RouterDomComponentProps } from '../../models/react-router-dom.model';
 
-// TODO remove ts-ignore and refactor
-
-// @ts-ignore
-const ShippingScreen: React.FC = ({ history }) => {
+const ShippingScreen: React.FC<RouterDomComponentProps> = ({ history }) => {
   const dispatch = useDispatch();
 
   // @ts-ignore
@@ -28,8 +26,7 @@ const ShippingScreen: React.FC = ({ history }) => {
   const [postalCode, setPostalCode] = useState(shippingAddress.postalCode);
   const [country, setCountry] = useState(shippingAddress.country);
 
-  // @ts-ignore
-  const submitHandler = (e) => {
+  const submitHandler = (e: React.FormEvent) => {
     e.preventDefault();
     dispatch(saveShippingAddress({ address, city, postalCode, country }));
     history.push('/delivery');

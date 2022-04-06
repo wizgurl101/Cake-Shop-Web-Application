@@ -9,11 +9,9 @@ import Rating from '../../components/Rating';
 import { listProductDetails, createProductReview } from '../../actions/productActions';
 import { PRODUCT_CREATE_REVIEW_RESET } from '../../constants/productConstants';
 import { SIZE_SMALL_PRICE, SIZE_MEDIUM_PRICE, SIZE_LARGE_PRICE } from '../../constants/priceConstants';
+import { RouterDomComponentProps } from '../../models/react-router-dom.model';
 
-// TODO remove ts-config and refactor
-
-// @ts-ignore
-const ProductDetailScreen: React.FC = ({ history, match }) => {
+const ProductDetailScreen: React.FC<RouterDomComponentProps> = ({ history, match }) => {
   const dispatch = useDispatch();
 
   const [qty, setQty] = useState(1);
@@ -66,13 +64,11 @@ const ProductDetailScreen: React.FC = ({ history, match }) => {
     setQty(e.target.value);
   };
 
-  // @ts-ignore
   const addToCartHandler = () => {
     history.push(`/cart/${match.params.id}?qty=${qty}&price=${price}`);
   };
 
-  // @ts-ignore
-  const submitHandler = (e) => {
+  const submitHandler = (e: React.FormEvent) => {
     e.preventDefault();
     dispatch(createProductReview(match.params.id, { rating, comment }));
   };

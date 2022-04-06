@@ -76,7 +76,7 @@ const OrderDetailScreen: React.FC = ({ match, history }) => {
         setSdkReady(true);
       }
     }
-  }, [history, userInfo, order, orderId, successPayment, successDelivery]);
+  }, [history, dispatch, userInfo, order, orderId, successPayment, successDelivery]);
 
   const setDeliveryStatusHandler = () => {
     dispatch(changeOrderDeliveryStatus(order));

@@ -7,11 +7,9 @@ import Loader from '../../components/Loader';
 import FormContainer from '../../components/FormContainer';
 import { getUserDetails, updateUser } from '../../actions/userActions';
 import { USER_UPDATE_RESET } from '../../constants/userConstants';
+import { RouterDomComponentProps } from '../../models/react-router-dom.model';
 
-// TODO remove ts-ignore and refactor
-
-// @ts-ignore
-const UserEditScreen: React.FC = ({ match, history }) => {
+const UserEditScreen: React.FC<RouterDomComponentProps> = ({ match, history }) => {
   const userId = match.params.id;
 
   const [name, setName] = useState('');
@@ -43,8 +41,7 @@ const UserEditScreen: React.FC = ({ match, history }) => {
     }
   }, [dispatch, history, userId, user, successUpdate]);
 
-  // @ts-ignore
-  const submitHandler = (e) => {
+  const submitHandler = (e: React.FormEvent) => {
     e.preventDefault();
     dispatch(
       updateUser({

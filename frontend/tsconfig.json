@@ -1,7 +1,8 @@
 {
   "compilerOptions": {
     "jsx": "react-jsx",
-    "target": "es2016",
+    "target": "es2020",
+    "types": ["react/next", "react-dom/next"],
     "module": "esnext",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,

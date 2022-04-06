@@ -7,10 +7,9 @@ import Message from '../../components/Message';
 import Loader from '../../components/Loader';
 import { getUserDetails, updateUserProfile } from '../../actions/userActions';
 import { listUserOrders } from '../../actions/orderActions';
+import { RouterDomComponentProps } from '../../models/react-router-dom.model';
 
-// TODO remove ts-ignore and refactor
-
-const UserProfileScreen: React.FC = () => {
+const UserProfileScreen: React.FC<RouterDomComponentProps> = ({ history }) => {
   const dispatch = useDispatch();
 
   const [name, setName] = useState('');
@@ -38,13 +37,9 @@ const UserProfileScreen: React.FC = () => {
   useEffect(
     () => {
       if (!userInfo) {
-        // @ts-ignore
-        // eslint-disable-next-line no-restricted-globals
         history.push('/login');
       } else {
-        // get user details
         if (!user.name) {
-          // get user details and list orders
           dispatch(getUserDetails('profile'));
           dispatch(listUserOrders());
         } else {
@@ -54,11 +49,10 @@ const UserProfileScreen: React.FC = () => {
       }
     },
     // eslint-disable-next-line no-restricted-globals
-    [dispatch, history, userInfo, user],
+    [dispatch, userInfo, user],
   );
 
-  // @ts-ignore
-  const submitHandler = (e) => {
+  const submitHandler = (e: React.FormEvent) => {
     e.preventDefault();
     if (password !== confirmPassword) {
       // @ts-ignore

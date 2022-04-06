@@ -4,11 +4,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import CheckoutProgress from '../../components/CheckoutProgress';
 import FormContainer from '../../components/FormContainer';
 import { savePaymentMethod } from '../../actions/cartActions';
+import { RouterDomComponentProps } from '../../models/react-router-dom.model';
 
-// TODO remove ts-ignore and refactor
-
-// @ts-ignore
-const PaymentScreen: React.FC = ({ history }) => {
+const PaymentScreen: React.FC<RouterDomComponentProps> = ({ history }) => {
   const dispatch = useDispatch();
 
   // @ts-ignore
@@ -24,8 +22,7 @@ const PaymentScreen: React.FC = ({ history }) => {
   //  set PayPal as default for future change to add more payment method options
   const [paymentMethod, setPaymentMethod] = useState('PayPal');
 
-  // @ts-ignore
-  const submitHandler = (e) => {
+  const submitHandler = (e: React.FormEvent) => {
     e.preventDefault();
     dispatch(savePaymentMethod(paymentMethod));
     history.push('/summary');

@@ -6,11 +6,9 @@ import Message from '../components/Message';
 import Loader from '../components/Loader';
 import FormContainer from '../components/FormContainer';
 import { register } from '../actions/userActions';
+import { RouterDomComponentProps } from '../models/react-router-dom.model';
 
-// TODO remove ts-ignore and refactor
-
-// @ts-ignore
-const RegisterScreen: React.FC = ({ history, location }) => {
+const RegisterScreen: React.FC<RouterDomComponentProps> = ({ history, location }) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -31,8 +29,7 @@ const RegisterScreen: React.FC = ({ history, location }) => {
     }
   }, [history, userInfo, redirect]);
 
-  // @ts-ignore
-  const submitHandler = (e) => {
+  const submitHandler = (e: React.FormEvent) => {
     e.preventDefault();
 
     if (password !== confirmPassword) {

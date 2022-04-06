@@ -29,21 +29,26 @@ const ProductListScreen: React.FC = ({ history }) => {
   const currentUserLogin = useSelector((state) => state.userLogin);
   const { userInfo } = currentUserLogin;
 
-  useEffect(() => {
-    dispatch({ type: PRODUCT_CREATE_RESET });
+  useEffect(
+    () => {
+      dispatch({ type: PRODUCT_CREATE_RESET });
 
-    if (!userInfo || !userInfo.isAdmin) {
-      history.push('/login');
-    }
+      if (!userInfo || !userInfo.isAdmin) {
+        history.push('/login');
+      }
 
-    if (successCreate) {
-      history.push(`/admin/product/${createdProduct._id}/edit`);
-    } else {
+      if (successCreate) {
+        // @ts-ignore
+        history.push(`/admin/product/${createdProduct._id}/edit`);
+      } else {
+        dispatch(listProducts());
+      }
+
       dispatch(listProducts());
-    }
-
-    dispatch(listProducts());
-  }, [dispatch, userInfo, history, successDelete, successCreate]);
+    },
+    // eslint-disable-next-line no-restricted-globals
+    [dispatch, userInfo, history, successDelete, successCreate],
+  );
 
   // @ts-ignore
   const deleteProductHander = (productId, productName) => {

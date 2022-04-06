@@ -8,11 +8,9 @@ import Loader from '../../components/Loader';
 import FormContainer from '../../components/FormContainer';
 import { listProductDetails, updateProduct } from '../../actions/productActions';
 import { PRODUCT_DETAILS_RESET, PRODUCT_UPDATE_RESET } from '../../constants/productConstants';
+import { RouterDomComponentProps } from '../../models/react-router-dom.model';
 
-// TODO remove ts-ignore and refactor
-
-// @ts-ignore
-const ProductEditScreen: React.FC = ({ match, history }) => {
+const ProductEditScreen: React.FC<RouterDomComponentProps> = ({ match, history }) => {
   const dispatch = useDispatch();
   const productId = match.params.id;
 
@@ -52,28 +50,25 @@ const ProductEditScreen: React.FC = ({ match, history }) => {
 
   // @ts-ignore
   const uploadImageFileHandler = async (event) => {
-    // get the file upload by user
     const imageFile = event.target.files[0];
     const formData = new FormData();
     formData.append('image', imageFile);
     setUploading(true);
 
-    // request to backend
     try {
       const config = { headers: { 'Content-Type': 'multipart/form-data' } };
       const { data } = await axios.post('/cakeshop/upload', formData, config);
 
       setImage(data);
-      setUploading(false);
     } catch (error) {
       console.error(error);
-      setUploading(false);
     }
+
+    setUploading(false);
   };
 
-  // @ts-ignore
-  const submitHandler = (event) => {
-    event.preventDefault();
+  const submitHandler = (e: React.FormEvent) => {
+    e.preventDefault();
 
     dispatch(
       updateProduct({

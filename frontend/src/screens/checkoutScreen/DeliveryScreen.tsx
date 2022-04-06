@@ -4,11 +4,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import CheckoutProgress from '../../components/CheckoutProgress';
 import FormContainer from '../../components/FormContainer';
 import { saveDeliveryDate } from '../../actions/cartActions';
+import { RouterDomComponentProps } from '../../models/react-router-dom.model';
 
-// TODO remove ts-config and refactor
-
-// @ts-ignore
-const DeliveryScreen: React.FC = ({ history }) => {
+const DeliveryScreen: React.FC<RouterDomComponentProps> = ({ history }) => {
   const dispatch = useDispatch();
 
   // @ts-ignore
@@ -21,8 +19,7 @@ const DeliveryScreen: React.FC = ({ history }) => {
 
   const [deliveryDate, setDeliveryDate] = useState('');
 
-  // @ts-ignore
-  const submitHandler = (e) => {
+  const submitHandler = (e: React.FormEvent) => {
     e.preventDefault();
     dispatch(saveDeliveryDate(deliveryDate));
     history.push('/payment');

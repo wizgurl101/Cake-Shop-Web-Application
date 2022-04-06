@@ -2,19 +2,18 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Form, Button, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
+import { Dispatch } from 'redux';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
 import FormContainer from '../components/FormContainer';
 import { login } from '../actions/userActions';
+import { RouterDomComponentProps } from '../models/react-router-dom.model';
 
-// TODO remove ts-ignore and refactor
-
-// @ts-ignore
-const LoginScreen: React.FC = ({ history }) => {
+const LoginScreen: React.FC<RouterDomComponentProps> = ({ history }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const dispatch = useDispatch();
+  const dispatch: Dispatch<any> = useDispatch();
 
   // @ts-ignore
   const userLogin = useSelector((state) => state.userLogin);
@@ -29,8 +28,7 @@ const LoginScreen: React.FC = ({ history }) => {
     }
   }, [history, userInfo, redirect]);
 
-  // @ts-ignore
-  const submitHandler = (e) => {
+  const submitHandler = (e: React.FormEvent) => {
     e.preventDefault();
     dispatch(login(email, password));
   };
