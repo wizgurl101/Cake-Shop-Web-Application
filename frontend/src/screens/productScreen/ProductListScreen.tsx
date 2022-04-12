@@ -6,11 +6,9 @@ import Message from '../../components/Message';
 import Loader from '../../components/Loader';
 import { listProducts, deleteProduct, createProduct } from '../../actions/productActions';
 import { PRODUCT_CREATE_RESET } from '../../constants/productConstants';
+import { RouterDomComponentProps } from '../../models/react-router-dom.model';
 
-// TODO remove ts-ignore and refactor
-
-// @ts-ignore
-const ProductListScreen: React.FC = ({ history }) => {
+const ProductListScreen: React.FC<RouterDomComponentProps> = ({ history }) => {
   const dispatch = useDispatch();
 
   // @ts-ignore
