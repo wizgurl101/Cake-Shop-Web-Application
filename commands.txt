@@ -1,0 +1,3 @@
+# change all .js files in a directory to .tsx
+# powershell script
+Dir *.js | rename-item -newname { [io.path]::ChangeExtension($_.name, "tsx") }
