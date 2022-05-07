@@ -34,7 +34,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "jest-tests": "react-scripts test",
+    "cypress-test": "cypress open",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -56,6 +57,9 @@
     ]
   },
   "devDependencies": {
-    "@types/react-router-dom": "^5.3.3"
+    "@testing-library/cypress": "^8.0.2",
+    "@types/react-router-dom": "^5.3.3",
+    "@types/testing-library__cypress": "^5.0.9",
+    "cypress": "^9.6.0"
   }
 }
