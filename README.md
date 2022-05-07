@@ -10,6 +10,8 @@ This is a web application that allow users to create an account with a fictional
 
 ## About the project
 
+Current progress: Gradually migrate project to TypeScript and will first starts with the frontend. In addition, add Cypress and unit tests to ensure there is no breaking changes with the new refactor code.
+
 Learn about making a full-stack web application using the following technologies:
 
 - Node.js
