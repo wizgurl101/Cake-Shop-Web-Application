@@ -1,3 +1,4 @@
+import React from 'react';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Form, Button, Row, Col, Table } from 'react-bootstrap';
@@ -6,38 +7,39 @@ import Message from '../../components/Message';
 import Loader from '../../components/Loader';
 import { getUserDetails, updateUserProfile } from '../../actions/userActions';
 import { listUserOrders } from '../../actions/orderActions';
+import { RouterDomComponentProps } from '../../models/react-router-dom.model';
 
-const UserProfileScreen = () => {
+const UserProfileScreen: React.FC<RouterDomComponentProps> = ({ history }) => {
   const dispatch = useDispatch();
 
-  // state variables for user personal info form
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [message, setMessage] = useState(null);
 
+  // @ts-ignore
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
+  // @ts-ignore
   const userDetails = useSelector((state) => state.userDetails);
   const { loading, error, user } = userDetails;
 
+  // @ts-ignore
   const userUpdatedProfile = useSelector((state) => state.userUpdatedProfile);
   const { success: successUpdatedProfile } = userUpdatedProfile;
 
+  // @ts-ignore
   const orderListUser = useSelector((state) => state.orderListUser);
   const { loading: loadingUserOrdersList, error: errorUserOrdersList, orders } = orderListUser;
 
   useEffect(
     () => {
       if (!userInfo) {
-        // eslint-disable-next-line no-restricted-globals
         history.push('/login');
       } else {
-        // get user details
         if (!user.name) {
-          // get user details and list orders
           dispatch(getUserDetails('profile'));
           dispatch(listUserOrders());
         } else {
@@ -47,13 +49,13 @@ const UserProfileScreen = () => {
       }
     },
     // eslint-disable-next-line no-restricted-globals
-    [dispatch, history, userInfo, user],
+    [dispatch, userInfo, user],
   );
 
-  // FUNCTION
-  const submitHandler = (e) => {
+  const submitHandler = (e: React.FormEvent) => {
     e.preventDefault();
     if (password !== confirmPassword) {
+      // @ts-ignore
       setMessage('Passwords do not match');
     } else {
       dispatch(
@@ -71,8 +73,11 @@ const UserProfileScreen = () => {
     <Row>
       <Col md={3}>
         <h2>{user.name} Profile</h2>
+        {/* @ts-ignore */}
         {message && <Message variant="danger">{message}</Message>}
+        {/* @ts-ignore */}
         {error && <Message variant="danger">{error}</Message>}
+        {/* @ts-ignore */}
         {successUpdatedProfile && <Message variant="success">Profile Updated</Message>}
         {loading && <Loader />}
         <Form onSubmit={submitHandler}>
@@ -106,6 +111,7 @@ const UserProfileScreen = () => {
         {loadingUserOrdersList ? (
           <Loader />
         ) : errorUserOrdersList ? (
+          // @ts-ignore
           <Message variant="danger">{errorUserOrdersList}</Message>
         ) : (
           <Table striped bordered hover responsive className="table-sm">
@@ -120,6 +126,7 @@ const UserProfileScreen = () => {
               </tr>
             </thead>
             <tbody>
+              {/* @ts-ignore */}
               {orders.map((order) => (
                 <tr key={order._id}>
                   <td>{order._id}</td>

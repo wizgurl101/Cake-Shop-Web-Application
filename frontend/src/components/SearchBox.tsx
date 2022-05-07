@@ -1,10 +1,14 @@
+import React from 'react';
 import { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
+import { RouteComponentProps } from 'react-router-dom';
 
-const SearchBox = ({ history }) => {
+interface ChildComponentProps extends RouteComponentProps<any> {}
+
+const SearchBox: React.FC<ChildComponentProps> = ({ history }) => {
   const [searchProduct, setSearchProduct] = useState('');
 
-  const submitHandler = (e) => {
+  const submitHandler = (e: React.FormEvent) => {
     e.preventDefault();
 
     if (searchProduct.trim()) {

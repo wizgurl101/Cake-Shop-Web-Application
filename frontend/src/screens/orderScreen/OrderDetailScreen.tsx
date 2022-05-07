@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Row, Col, ListGroup, Image, Card, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
@@ -10,7 +10,10 @@ import { addZeroAtEnd } from '../../helpers/PriceSizeHelpers';
 import { changeOrderDeliveryStatus, getOrderDetails, processOrderPayment } from '../../actions/orderActions';
 import { ORDER_DELIVERY_RESET, ORDER_PAYMENT_RESET } from '../../constants/orderConstants';
 
-const OrderDetailScreen = ({ match, history }) => {
+// TODO remove ts-config and refactor
+
+// @ts-ignore
+const OrderDetailScreen: React.FC = ({ match, history }) => {
   const dispatch = useDispatch();
   const orderId = match.params.id;
 
@@ -18,22 +21,26 @@ const OrderDetailScreen = ({ match, history }) => {
   // for PayPal integration
   const [sdkReady, setSdkReady] = useState(false);
 
+  // @ts-ignore
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
+  // @ts-ignore
   const orderDetails = useSelector((state) => state.orderDetails);
   const { order, loading, error } = orderDetails;
 
+  // @ts-ignore
   const orderPayment = useSelector((state) => state.orderPayment);
   const { loading: loadingPayment, success: successPayment } = orderPayment;
 
+  // @ts-ignore
   const orderDelivery = useSelector((state) => state.orderDelivery);
   const { loading: loadingDelivery, success: successDelivery } = orderDelivery;
 
   // If page is not loading
   if (!loading) {
     // calculate order price before tax
-    order.itemsPrice = addZeroAtEnd(order.orderItems.reduce((acc, item) => acc + item.price * item.qty, 0));
+    order.itemsPrice = addZeroAtEnd(order.orderItems.reduce((acc: number, item: any): number => acc + item.price * item.qty, 0));
   }
 
   useEffect(() => {
@@ -69,13 +76,13 @@ const OrderDetailScreen = ({ match, history }) => {
         setSdkReady(true);
       }
     }
-  }, [history, userInfo, order, orderId, successPayment, successDelivery]);
+  }, [history, dispatch, userInfo, order, orderId, successPayment, successDelivery]);
 
-  // FUNCTIONS
   const setDeliveryStatusHandler = () => {
     dispatch(changeOrderDeliveryStatus(order));
   };
 
+  // @ts-ignore
   const setPaymentStatusHandler = (paymentResult) => {
     dispatch(processOrderPayment(orderId, paymentResult));
   };
@@ -83,6 +90,7 @@ const OrderDetailScreen = ({ match, history }) => {
   return loading ? (
     <Loader />
   ) : error ? (
+    // @ts-ignore
     <Message variant="danger">{error}</Message>
   ) : (
     <>
@@ -93,7 +101,6 @@ const OrderDetailScreen = ({ match, history }) => {
             <ListGroup.Item>
               <h2>Shipping</h2>
               <p>
-                {/* able to use order.user.name because of the populate method */}
                 <strong>Name: </strong> {order.user.name}
               </p>
               <p>
@@ -104,8 +111,10 @@ const OrderDetailScreen = ({ match, history }) => {
                 {order.shippingAddress.address}, {order.shippingAddress.city} {order.shippingAddress.postalCode}, {order.shippingAddress.country}
               </p>
               {order.isDelivered ? (
+                // @ts-ignore
                 <Message variant="success">Delivered on {order.deliveryDate.substring(0, 10)}</Message>
               ) : (
+                // @ts-ignore
                 <Message variant="danger">
                   <strong>Not Delivered </strong>- Delivery Date: {order.deliveryDate.substring(0, 10)}
                 </Message>
@@ -118,15 +127,18 @@ const OrderDetailScreen = ({ match, history }) => {
                 <strong>Method: </strong>
                 {order.paymentMethod}
               </p>
+              {/* @ts-ignore */}
               {order.isPaid ? <Message variant="success">Paid on {order.paidAt.substring(0, 10)}</Message> : <Message variant="danger">Not Paid</Message>}
             </ListGroup.Item>
 
             <ListGroup.Item>
               <h2>Order Items</h2>
               {order.orderItems.length === 0 ? (
+                // @ts-ignore
                 <Message>Order is empty</Message>
               ) : (
                 <ListGroup variant="flush">
+                  {/* @ts-ignore */}
                   {order.orderItems.map((orderItem, index) => (
                     <ListGroup.Item key={index}>
                       <Row>

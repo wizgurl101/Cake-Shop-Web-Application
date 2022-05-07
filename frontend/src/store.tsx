@@ -2,9 +2,9 @@ import { createStore, combineReducers, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
-import { cartReducer } from './reducers/cartReducers.js';
+import { cartReducer } from './reducers/cartReducers';
 
-import { orderCreateReducer, orderDetailsReducer, orderListAdminReducer, orderListUserReducer, orderPaymentReducer, orderDeliveryReducer } from './reducers/orderReducers.js';
+import { orderCreateReducer, orderDetailsReducer, orderListAdminReducer, orderListUserReducer, orderPaymentReducer, orderDeliveryReducer } from './reducers/orderReducers';
 
 import {
   productCreateReducer,
@@ -14,9 +14,9 @@ import {
   productReviewCreateReducer,
   productUpdateReducer,
   productTopRatedReducer,
-} from './reducers/productReducers.js';
+} from './reducers/productReducers';
 
-import { userLoginReducer, userRegisterReducer, userListReducer, userDeleteReducer, userUpdateReducer, userDetailsReducer, userUpdateProfileReducer } from './reducers/userReducers.js';
+import { userLoginReducer, userRegisterReducer, userListReducer, userDeleteReducer, userUpdateReducer, userDetailsReducer, userUpdateProfileReducer } from './reducers/userReducers';
 
 const reducer = combineReducers({
   cart: cartReducer,
@@ -41,13 +41,18 @@ const reducer = combineReducers({
   userDetails: userDetailsReducer,
   userUpdatedProfile: userUpdateProfileReducer,
 });
+// TODO remove ts-ignore and refactor
 
+// @ts-ignore
 const cartItemsFromStorage = localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')) : [];
 
+// @ts-ignore
 const shippingAddressFromStorage = localStorage.getItem('shippingAddress') ? JSON.parse(localStorage.getItem('shippingAddress')) : [];
 
+// @ts-ignore
 const deliveryDateFromStorage = localStorage.getItem('deliveryDate') ? JSON.parse(localStorage.getItem('deliveryDate')) : [];
 
+// @ts-ignore
 const userInfoFromStorage = localStorage.getItem('userInfo') ? JSON.parse(localStorage.getItem('userInfo')) : null;
 
 const initialState = {
@@ -59,6 +64,7 @@ const initialState = {
   userLogin: { userInfo: userInfoFromStorage },
 };
 
+// @ts-ignore
 const store = createStore(reducer, initialState, composeWithDevTools(applyMiddleware(thunk)));
 
 export default store;

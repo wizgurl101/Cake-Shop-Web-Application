@@ -1,13 +1,16 @@
-import { useState } from 'react';
+// @ts-nocheck
+import React, { useState } from 'react';
 import { Form, Button, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import CheckoutProgress from '../../components/CheckoutProgress';
 import FormContainer from '../../components/FormContainer';
 import { savePaymentMethod } from '../../actions/cartActions';
+import { RouterDomComponentProps } from '../../models/react-router-dom.model';
 
-const PaymentScreen = ({ history }) => {
+const PaymentScreen: React.FC<RouterDomComponentProps> = ({ history }) => {
   const dispatch = useDispatch();
 
+  // @ts-ignore
   const cart = useSelector((state) => state.cart);
   const { shippingAddress, deliveryDate } = cart;
 
@@ -20,7 +23,7 @@ const PaymentScreen = ({ history }) => {
   //  set PayPal as default for future change to add more payment method options
   const [paymentMethod, setPaymentMethod] = useState('PayPal');
 
-  const submitHandler = (e) => {
+  const submitHandler = (e: React.FormEvent) => {
     e.preventDefault();
     dispatch(savePaymentMethod(paymentMethod));
     history.push('/summary');
@@ -28,6 +31,7 @@ const PaymentScreen = ({ history }) => {
 
   return (
     <FormContainer>
+      {/* @ts-ignore */}
       <CheckoutProgress signin shipping delivery payment />
       <h1>Payment Method</h1>
       <Form onSubmit={submitHandler}>

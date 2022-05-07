@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Form, Button } from 'react-bootstrap';
@@ -7,8 +8,9 @@ import Loader from '../../components/Loader';
 import FormContainer from '../../components/FormContainer';
 import { getUserDetails, updateUser } from '../../actions/userActions';
 import { USER_UPDATE_RESET } from '../../constants/userConstants';
+import { RouterDomComponentProps } from '../../models/react-router-dom.model';
 
-const UserEditScreen = ({ match, history }) => {
+const UserEditScreen: React.FC<RouterDomComponentProps> = ({ match, history }) => {
   const userId = match.params.id;
 
   const [name, setName] = useState('');
@@ -17,9 +19,11 @@ const UserEditScreen = ({ match, history }) => {
 
   const dispatch = useDispatch();
 
+  // @ts-ignore
   const userDetails = useSelector((state) => state.userDetails);
   const { loading, error, user } = userDetails;
 
+  // @ts-ignore
   const userUpdate = useSelector((state) => state.userUpdate);
   const { loading: loadingUpdate, error: errorUpdate, success: successUpdate } = userUpdate;
 
@@ -38,7 +42,7 @@ const UserEditScreen = ({ match, history }) => {
     }
   }, [dispatch, history, userId, user, successUpdate]);
 
-  const submitHandler = (e) => {
+  const submitHandler = (e: React.FormEvent) => {
     e.preventDefault();
     dispatch(
       updateUser({
@@ -58,10 +62,12 @@ const UserEditScreen = ({ match, history }) => {
       <FormContainer>
         <h1>Edit User</h1>
         {loadingUpdate && <Loader />}
+        {/* @ts-ignore */}
         {errorUpdate && <Message variant="danger">{errorUpdate}</Message>}
         {loading ? (
           <Loader />
         ) : error ? (
+          // @ts-ignore
           <Message variant="danger">{error}</Message>
         ) : (
           <Form onSubmit={submitHandler}>
@@ -76,6 +82,7 @@ const UserEditScreen = ({ match, history }) => {
             </Form.Group>
 
             <Form.Group controlId="isadmin">
+              {/* @ts-ignore */}
               <Form.Check type="checkbox" label="Is Admin" checked={isAdmin} onChange={(e) => setIsAdmin(e.target.value)}></Form.Check>
             </Form.Group>
 

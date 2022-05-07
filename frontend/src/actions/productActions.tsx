@@ -25,12 +25,11 @@ import {
 
 import { logout } from './userActions';
 
-/**
- *
- * @returns
- */
+// TODO remove ts-ignore and refactor
+
 export const listProducts =
   (searchProduct = '') =>
+  // @ts-ignore
   async (dispatch) => {
     try {
       dispatch({ type: PRODUCT_LIST_REQUEST });
@@ -44,16 +43,13 @@ export const listProducts =
     } catch (error) {
       dispatch({
         type: PRODUCT_LIST_FAIL,
+        // @ts-ignore
         payload: error.response && error.response.data.message ? error.response.data.message : error.message,
       });
     }
   };
 
-/**
- *
- * @param {*} id
- * @returns
- */
+// @ts-ignore
 export const deleteProduct = (id) => async (dispatch, getState) => {
   try {
     dispatch({ type: PRODUCT_DELETE_REQUEST });
@@ -74,6 +70,7 @@ export const deleteProduct = (id) => async (dispatch, getState) => {
 
     dispatch({ type: PRODUCT_DELETE_SUCCESS });
   } catch (error) {
+    // @ts-ignore
     const message = error.response && error.response.data.message ? error.response.data.message : error.message;
 
     // if user is not admin
@@ -88,11 +85,7 @@ export const deleteProduct = (id) => async (dispatch, getState) => {
   }
 };
 
-/**
- *
- * @param {*} product
- * @returns
- */
+// @ts-ignore
 export const updateProduct = (product) => async (dispatch, getState) => {
   try {
     dispatch({ type: PRODUCT_UPDATE_REQUEST });
@@ -112,9 +105,9 @@ export const updateProduct = (product) => async (dispatch, getState) => {
 
     dispatch({ type: PRODUCT_UPDATE_SUCCESS, payload: data });
   } catch (error) {
+    // @ts-ignore
     const message = error.response && error.response.data.message ? error.response.data.message : error.message;
 
-    // if user is not admin
     if (message === 'Not authorized, token failed') {
       dispatch(logout());
     }
@@ -126,11 +119,7 @@ export const updateProduct = (product) => async (dispatch, getState) => {
   }
 };
 
-/**
- *
- * @param {*} id
- * @returns
- */
+// @ts-ignore
 export const listProductDetails = (id) => async (dispatch) => {
   try {
     dispatch({ type: PRODUCT_DETAILS_REQUEST });
@@ -141,15 +130,13 @@ export const listProductDetails = (id) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: PRODUCT_DETAILS_FAIL,
+      // @ts-ignore
       payload: error.response && error.response.data.message ? error.response.data.message : error.message,
     });
   }
 };
 
-/**
- *
- * @returns
- */
+// @ts-ignore
 export const createProduct = () => async (dispatch, getState) => {
   try {
     dispatch({ type: PRODUCT_CREATE_REQUEST });
@@ -160,14 +147,13 @@ export const createProduct = () => async (dispatch, getState) => {
 
     const config = { headers: { Authorization: `Bearer ${userInfo.token}` } };
 
-    // send request to backend to create a new product
     const { data } = await axios.post(`/cakeshop/products`, {}, config);
 
     dispatch({ type: PRODUCT_CREATE_SUCCESS, payload: data });
   } catch (error) {
+    // @ts-ignore
     const message = error.response && error.response.data.message ? error.response.data.message : error.message;
 
-    // if user is not admin
     if (message === 'Not authorized, token failed') {
       dispatch(logout());
     }
@@ -179,6 +165,7 @@ export const createProduct = () => async (dispatch, getState) => {
   }
 };
 
+// @ts-ignore
 export const createProductReview = (productId, review) => async (dispatch, getState) => {
   try {
     dispatch({ type: PRODUCT_CREATE_REVIEW_REQUEST });
@@ -194,11 +181,11 @@ export const createProductReview = (productId, review) => async (dispatch, getSt
       },
     };
 
-    // send a request to backend to create a new review for the product
     await axios.post(`/cakeshop/products/${productId}/reviews`, review, config);
 
     dispatch({ type: PRODUCT_CREATE_REVIEW_SUCCESS });
   } catch (error) {
+    // @ts-ignore
     const message = error.response && error.response.data.message ? error.response.data.message : error.message;
 
     if (message === 'Not authorized, token failed') {
@@ -209,6 +196,7 @@ export const createProductReview = (productId, review) => async (dispatch, getSt
   }
 };
 
+// @ts-ignore
 export const listTopProducts = () => async (dispatch) => {
   try {
     dispatch({ type: PRODUCT_TOP_REQUEST });
@@ -219,6 +207,7 @@ export const listTopProducts = () => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: PRODUCT_TOP_FAIL,
+      // @ts-ignore
       payload: error.response && error.response.data.message ? error.response.data.message : error.message,
     });
   }

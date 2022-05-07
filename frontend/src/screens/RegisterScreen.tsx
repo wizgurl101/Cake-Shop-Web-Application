@@ -1,13 +1,15 @@
+// @ts-nocheck
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Form, Button, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import Message from '../components/Message.js';
-import Loader from '../components/Loader.js';
-import FormContainer from '../components/FormContainer.js';
-import { register } from '../actions/userActions.js';
+import Message from '../components/Message';
+import Loader from '../components/Loader';
+import FormContainer from '../components/FormContainer';
+import { register } from '../actions/userActions';
+import { RouterDomComponentProps } from '../models/react-router-dom.model';
 
-const RegisterScreen = ({ history, location }) => {
+const RegisterScreen: React.FC<RouterDomComponentProps> = ({ history, location }) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -16,6 +18,7 @@ const RegisterScreen = ({ history, location }) => {
 
   const dispatch = useDispatch();
 
+  // @ts-ignore
   const userRegister = useSelector((state) => state.userRegister);
   const { loading, error, userInfo } = userRegister;
 
@@ -27,10 +30,11 @@ const RegisterScreen = ({ history, location }) => {
     }
   }, [history, userInfo, redirect]);
 
-  const submitHandler = (e) => {
+  const submitHandler = (e: React.FormEvent) => {
     e.preventDefault();
 
     if (password !== confirmPassword) {
+      // @ts-ignore
       setMessage('Passwords do not match');
     } else {
       dispatch(register(name, email, password));
@@ -40,7 +44,9 @@ const RegisterScreen = ({ history, location }) => {
   return (
     <FormContainer>
       <h1>Sign Up</h1>
+      {/* @ts-ignore */}
       {message && <Message variant="danger">{message}</Message>}
+      {/* @ts-ignore */}
       {error && <Message variant="danger">{error}</Message>}
       {loading && <Loader />}
       <Form onSubmit={submitHandler}>

@@ -1,6 +1,10 @@
+import React from 'react';
 import { Helmet } from 'react-helmet';
 
-const MetaData = ({ title, description, keywords }) => {
+// TODO remove ts-ignore and refactor
+
+// @ts-ignore
+const MetaData: React.FC = ({ title, description, keywords }) => {
   return (
     <Helmet>
       <title>{title}</title>

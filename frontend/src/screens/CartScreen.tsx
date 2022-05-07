@@ -1,13 +1,16 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Row, Col, ListGroup, Image, Form, Button, Card } from 'react-bootstrap';
-import Message from '../components/Message.js';
+import Message from '../components/Message';
 import { addToCart, removeFromCart } from '../actions/cartActions';
-import { SIZE_SMALL_PRICE } from '../constants/priceConstants.js';
-import { determinePrice, determineSize } from '../helpers/PriceSizeHelpers.js';
+import { SIZE_SMALL_PRICE } from '../constants/priceConstants';
+import { determinePrice, determineSize } from '../helpers/PriceSizeHelpers';
 
-const CartScreen = ({ match, location, history }) => {
+// TODO remove ts-ignore and refactor
+
+// @ts-ignore
+const CartScreen: React.FC = ({ match, location, history }) => {
   const dispatch = useDispatch();
   const productId = match.params.id;
 
@@ -20,27 +23,27 @@ const CartScreen = ({ match, location, history }) => {
 
   let size = determineSize(price);
 
+  // @ts-ignore
   const cart = useSelector((state) => state.cart);
   const { cartItems } = cart;
 
   useEffect(() => {
-    // only add to cart if there is a product ID
     if (productId) {
       dispatch(addToCart(productId, qty, size, price));
     }
   }, [dispatch, productId, qty, size, price]);
 
-  // FUNCTIONS
+  // @ts-ignore
   const removeFromCartHandler = (id) => {
     dispatch(removeFromCart(id));
   };
 
+  // @ts-ignore
   const sizeChangeHandler = (e) => {
     setPrice(determinePrice(e.target.value));
   };
 
   const checkoutHandler = () => {
-    // redirect login user to shipping page
     history.push('/shipping');
   };
 
@@ -49,9 +52,11 @@ const CartScreen = ({ match, location, history }) => {
       <Col md={8}>
         <h1>Shopping Cart</h1>
         {cartItems.length === 0 ? (
+          // @ts-ignore
           <Message>Your cart is empty</Message>
         ) : (
           <ListGroup variant="flush">
+            {/* @ts-ignore */}
             {cartItems.map((cartItem) => (
               <ListGroup.Item key={cartItem.product}>
                 <Row>
@@ -79,6 +84,7 @@ const CartScreen = ({ match, location, history }) => {
                       as="select"
                       value={qty}
                       onChange={(e) => {
+                        // @ts-ignore
                         setQty(e.target.value);
                         dispatch(addToCart(cartItem.product, Number(e.target.value), size, price));
                       }}
@@ -109,7 +115,8 @@ const CartScreen = ({ match, location, history }) => {
         <Card>
           <ListGroup variant="flush">
             <ListGroup.Item>
-              <h2>Subtotal ({cartItems.reduce((acc, item) => acc + item.qty, '')}) items</h2>${cartItems.reduce((acc, item) => acc + item.qty * item.price, 0).toFixed(2)}
+              {/* TODO refactor the any on item */}
+              <h2>Subtotal ({cartItems.reduce((acc: number, item: any) => acc + item.qty, '')}) items</h2>${cartItems.reduce((acc: number, item: any) => acc + item.qty * item.price, 0).toFixed(2)}
             </ListGroup.Item>
             <ListGroup.Item>
               <Button type="button" className="btn-block" disabled={cartItems.length === 0} onClick={checkoutHandler}>

@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Table, Button, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
@@ -6,12 +6,17 @@ import Message from '../../components/Message';
 import Loader from '../../components/Loader';
 import { listAllOrders } from '../../actions/orderActions';
 
-const OrderListScreen = ({ history }) => {
+// TODO remove ts-config and refactor
+
+// @ts-ignore
+const OrderListScreen: React.FC = ({ history }) => {
   const dispatch = useDispatch();
 
+  // @ts-ignore
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
+  // @ts-ignore
   const orderListAdmin = useSelector((state) => state.orderListAdmin);
   const { loading, error, orders } = orderListAdmin;
 
@@ -33,6 +38,7 @@ const OrderListScreen = ({ history }) => {
       {loading ? (
         <Loader />
       ) : error ? (
+        // @ts-ignore
         <Message variant="danger">{error}</Message>
       ) : (
         <Table striped bordered hover responsive className="table-sm">
@@ -48,6 +54,7 @@ const OrderListScreen = ({ history }) => {
             </tr>
           </thead>
           <tbody>
+            {/* @ts-ignore */}
             {orders.map((order) => (
               <tr key={order._id}>
                 <td>{order._id}</td>

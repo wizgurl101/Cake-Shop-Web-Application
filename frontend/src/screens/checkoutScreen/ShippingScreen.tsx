@@ -1,14 +1,16 @@
-import { useState } from 'react';
+// @ts-nocheck
+import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import FormContainer from '../../components/FormContainer';
 import CheckProgress from '../../components/CheckoutProgress';
 import { saveShippingAddress } from '../../actions/cartActions';
+import { RouterDomComponentProps } from '../../models/react-router-dom.model';
 
-const ShippingScreen = ({ history }) => {
+const ShippingScreen: React.FC<RouterDomComponentProps> = ({ history }) => {
   const dispatch = useDispatch();
 
-  // check that user is log in
+  // @ts-ignore
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
@@ -16,6 +18,7 @@ const ShippingScreen = ({ history }) => {
     history.push('/login');
   }
 
+  // @ts-ignore
   const cart = useSelector((state) => state.cart);
   const { shippingAddress } = cart;
 
@@ -24,13 +27,14 @@ const ShippingScreen = ({ history }) => {
   const [postalCode, setPostalCode] = useState(shippingAddress.postalCode);
   const [country, setCountry] = useState(shippingAddress.country);
 
-  const submitHandler = (e) => {
+  const submitHandler = (e: React.FormEvent) => {
     e.preventDefault();
     dispatch(saveShippingAddress({ address, city, postalCode, country }));
     history.push('/delivery');
   };
   return (
     <FormContainer>
+      {/* @ts-ignore */}
       <CheckProgress signin shipping />
       <h1>Shipping</h1>
       <Form onSubmit={submitHandler}>

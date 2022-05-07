@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Carousel, Image } from 'react-bootstrap';
@@ -6,13 +6,13 @@ import Loader from './Loader';
 import Message from './Message';
 import { listTopProducts } from '../actions/productActions';
 
-/**
- *
- * @returns
- */
-const ProductCarousel = () => {
+// TODO remove ts-ignore and refactor
+
+// @ts-ignore
+const ProductCarousel: React.FC = () => {
   const dispatch = useDispatch();
 
+  // @ts-ignore
   const productTopRated = useSelector((state) => state.productTopRated);
   const { loading, error, products } = productTopRated;
 
@@ -23,10 +23,12 @@ const ProductCarousel = () => {
   return loading ? (
     <Loader />
   ) : error ? (
+    // @ts-ignore
     <Message variant="danger">{error}</Message>
   ) : (
     <Carousel pause="hover" className="bg-dark">
-      {products.map((product) => (
+      {/* TODO replace this any */}
+      {products.map((product: any) => (
         <Carousel.Item key={product._id}>
           <Link to={`/product/${product._id}`}>
             <Image src={product.image} alt={product.name} fluid />

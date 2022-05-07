@@ -1,17 +1,21 @@
-import { CART_ADD_ITEM, CART_REMOVE_ITEM, CART_SAVE_DELIVERY_DATE, CART_SAVE_PAYMENT_METHOD, CART_SAVE_SHIPPING_ADDRESS } from '../constants/cartConstants.js';
+import { CART_ADD_ITEM, CART_REMOVE_ITEM, CART_SAVE_DELIVERY_DATE, CART_SAVE_PAYMENT_METHOD, CART_SAVE_SHIPPING_ADDRESS } from '../constants/cartConstants';
 
+// TODO remove ts-ignore and refactor
+
+// @ts-ignore
 export const cartReducer = (state = { cartItems: [], shippingAddress: {}, deliveryDate: '' }, action) => {
   switch (action.type) {
     case CART_ADD_ITEM:
       const item = action.payload;
 
-      // check if the item exit in cart
+      // @ts-ignore
       const itemExistInCart = state.cartItems.find((cartItem) => cartItem.product === item.product);
 
       // if item exists already in cart, update qty of item
       if (itemExistInCart) {
         return {
           ...state,
+          // @ts-ignore
           cartItems: state.cartItems.map((cartItem) => (cartItem.product === itemExistInCart.product ? item : cartItem)),
         };
       } else {
@@ -24,6 +28,7 @@ export const cartReducer = (state = { cartItems: [], shippingAddress: {}, delive
     case CART_REMOVE_ITEM:
       return {
         ...state,
+        // @ts-ignore
         cartItems: state.cartItems.filter((cartItem) => cartItem.product !== action.payload),
       };
     case CART_SAVE_SHIPPING_ADDRESS:

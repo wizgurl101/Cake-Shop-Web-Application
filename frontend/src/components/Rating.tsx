@@ -1,11 +1,15 @@
+import React from 'react';
 import PropTypes from 'prop-types';
+
+// TODO remove ts-ignore and refactor
 
 /**
  * Rating component display 5-stars rating system
  * @param {*} param0
  * @returns
  */
-const Rating = ({ value, text, color }) => {
+// @ts-ignore
+const Rating: React.FC = ({ value, text, color }) => {
   return (
     <div className="rating">
       <span>

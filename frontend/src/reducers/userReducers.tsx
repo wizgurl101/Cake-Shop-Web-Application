@@ -27,6 +27,9 @@ import {
   USER_UPDATE_SUCCESS,
 } from '../constants/userConstants';
 
+// TODO remove ts-ignore and refactor
+
+// @ts-ignore
 export const userLoginReducer = (state = {}, action) => {
   switch (action.type) {
     case USER_LOGIN_REQUEST:
@@ -42,6 +45,7 @@ export const userLoginReducer = (state = {}, action) => {
   }
 };
 
+// @ts-ignore
 export const userRegisterReducer = (state = {}, action) => {
   switch (action.type) {
     case USER_REGISTER_REQUEST:
@@ -55,6 +59,7 @@ export const userRegisterReducer = (state = {}, action) => {
   }
 };
 
+// @ts-ignore
 export const userListReducer = (state = { users: [] }, action) => {
   switch (action.type) {
     case USER_LIST_REQUEST:
@@ -70,6 +75,7 @@ export const userListReducer = (state = { users: [] }, action) => {
   }
 };
 
+// @ts-ignore
 export const userDeleteReducer = (state = {}, action) => {
   switch (action.type) {
     case USER_DELETE_REQUEST:
@@ -83,6 +89,7 @@ export const userDeleteReducer = (state = {}, action) => {
   }
 };
 
+// @ts-ignore
 export const userUpdateReducer = (state = { users: [] }, action) => {
   switch (action.type) {
     case USER_UPDATE_REQUEST:
@@ -98,6 +105,7 @@ export const userUpdateReducer = (state = { users: [] }, action) => {
   }
 };
 
+// @ts-ignore
 export const userDetailsReducer = (state = { user: {} }, action) => {
   switch (action.type) {
     case USER_DETAILS_REQUEST:
@@ -113,6 +121,7 @@ export const userDetailsReducer = (state = { user: {} }, action) => {
   }
 };
 
+// @ts-ignore
 export const userUpdateProfileReducer = (state = {}, action) => {
   switch (action.type) {
     case USER_UPDATE_PROFILE_REQUEST:

@@ -5,7 +5,7 @@ import { SIZE_LARGE_ABBREVIATION, SIZE_LARGE_PRICE, SIZE_MEDIUM_ABBREVIATION, SI
  * @param {*} size
  * @returns price of the product
  */
-export const determinePrice = (size) => {
+export const determinePrice = (size: string): number => {
   switch (size) {
     case SIZE_SMALL_ABBREVIATION:
       return SIZE_SMALL_PRICE;
@@ -23,7 +23,7 @@ export const determinePrice = (size) => {
  * @param {*} price
  * @returns size of the product user ordered
  */
-export const determineSize = (price) => {
+export const determineSize = (price: number): string => {
   switch (price) {
     case SIZE_SMALL_PRICE:
       return SIZE_SMALL_ABBREVIATION;
@@ -38,9 +38,7 @@ export const determineSize = (price) => {
 
 /**
  * Function add an ending zero to calculated price after rounding
- * @param {*} num
- * @returns
  */
-export const addZeroAtEnd = (price) => {
+export const addZeroAtEnd = (price: number): string => {
   return (Math.round(price * 100) / 100).toFixed(2);
 };
